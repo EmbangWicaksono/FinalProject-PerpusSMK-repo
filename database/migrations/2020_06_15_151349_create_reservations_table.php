@@ -14,6 +14,7 @@ class CreateReservationsTable extends Migration
     public function up()
     {
         Schema::create('reservations', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('id anggota')->unsigned();
             $table->char('kode buku', 10);
             $table->date('tanggal reservasi');
@@ -23,7 +24,6 @@ class CreateReservationsTable extends Migration
         Schema::table('reservations', function (Blueprint $table) {
             $table->foreign('id anggota')->references('id')->on('users');
             $table->foreign('kode buku')->references('kode buku')->on('book_items');
-            $table->primary(['id anggota', 'kode buku']);
         });
     }
 

@@ -21,6 +21,9 @@ class CreateBookEntriesTable extends Migration
             $table->integer('harga');
             $table->timestamps();
         });
+        Schema::table('book_entries', function (Blueprint $table) {
+            $table->foreign('ISBN')->references('ISBN')->on('books');
+        });
     }
 
     /**
