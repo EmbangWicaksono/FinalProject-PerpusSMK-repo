@@ -10,4 +10,8 @@ class loan extends Model
     {
         return $this->belongsTo('App\User', 'ID anggota');
     }
+    public function book_item()
+    {
+        return $this->belongsTo('App\book_item', 'kode buku', 'kode buku');
+    }
 }
