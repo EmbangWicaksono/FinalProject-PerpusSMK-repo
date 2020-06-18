@@ -15,4 +15,9 @@
 //     return view('welcome');
 // });
 
-Route::get('/', 'HomeController@index');
+Route::get('/pengunjung', function ($id) {
+    return view('pages.visitor', $data);
+});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
