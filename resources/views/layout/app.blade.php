@@ -3,11 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>{{config.('app.name','PerpusPGRI2')}}</title>
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <title>{{config('app.name','PerpusPGRI2')}}</title>
 
     </head>
     <body>
-        @yield('content')
+        @include('component.navbar')
+        <div class="container">
+            @yield('content')
+        </div>
     </body>
 </html>
