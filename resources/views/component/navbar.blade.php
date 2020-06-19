@@ -11,10 +11,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/pengunjung">Home</a>
                           </li>
                           <li class="nav-item active">
-                            <a class="nav-link" href="#">Pencarian Buku</a>
+                            <a class="nav-link" href="/search_book">Pencarian Buku</a>
                           </li>
                           <li class="nav-item dropdown">
                             {{-- <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a> --}}

@@ -24,14 +24,69 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <select name="status" id="status" class="form-control @error('status') is-invalid @enderror" onchange="changetextbox();">
+                                    <option value="siswa">Siswa</option>
+                                    <option value="guru">Guru</option>
+                                </select>
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="jenis_kelamin" class="col-md-4 col-form-label text-md-right">{{ __('jenis_kelamin') }}</label>
 
-                                @error('email')
+                            <div class="col-md-6">
+                                <select name="jenis_kelamin" id="jenis_kelamin" class="form-control @error('jenis_kelamin') is-invalid @enderror">
+                                    <option value="Laki-laki">Laki Laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                                @error('jenis_kelamin')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kelas" class="col-md-4 col-form-label text-md-right">{{ __('Kelas') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="kelas" type="kelas" class="form-control @error('kelas') is-invalid @enderror" name="kelas" value="{{ old('kelas') }}">
+
+                                @error('kelas')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="telepon" class="col-md-4 col-form-label text-md-right">{{ __('No.Telp') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="telepon" type="telepon" class="form-control @error('telepon') is-invalid @enderror" name="telepon" value="{{ old('telepon') }}">
+
+                                @error('telepon')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Nomor Induk') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="username" type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username">
+
+                                @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -74,4 +129,14 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+function changetextbox()
+{
+    if (document.getElementById("status").value === "guru") {
+        document.getElementById("kelas").disable='true';
+    } else {
+        document.getElementById("kelas").disable='false';
+    }
+}
+</script>
 @endsection
