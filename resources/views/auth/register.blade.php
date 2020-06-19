@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('scripts.jregister')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -28,7 +29,7 @@
                             <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
 
                             <div class="col-md-6">
-                                <select name="status" id="status" class="form-control @error('status') is-invalid @enderror" onchange="changetextbox();">
+                                <select name="status" id="status" class="form-control @error('status') is-invalid @enderror">
                                     <option value="siswa">Siswa</option>
                                     <option value="guru">Guru</option>
                                 </select>
@@ -54,16 +55,16 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row" id="kelas_column">
                             <label for="kelas" class="col-md-4 col-form-label text-md-right">{{ __('Kelas') }}</label>
-
+                            
                             <div class="col-md-6">
-                                <input id="kelas" type="kelas" class="form-control @error('kelas') is-invalid @enderror" name="kelas" value="{{ old('kelas') }}">
-
+                                <input id="kelas" type="text" class="form-control @error('kelas') is-invalid @enderror" name="kelas" value="{{ old('kelas') }}">
+                                
                                 @error('kelas')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -71,7 +72,7 @@
                             <label for="telepon" class="col-md-4 col-form-label text-md-right">{{ __('No.Telp') }}</label>
 
                             <div class="col-md-6">
-                                <input id="telepon" type="telepon" class="form-control @error('telepon') is-invalid @enderror" name="telepon" value="{{ old('telepon') }}">
+                                <input id="telepon" type="text" class="form-control @error('telepon') is-invalid @enderror" name="telepon" value="{{ old('telepon') }}" maxlength="13">
 
                                 @error('telepon')
                                     <span class="invalid-feedback" role="alert">
@@ -84,7 +85,7 @@
                             <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Nomor Induk') }}</label>
 
                             <div class="col-md-6">
-                                <input id="username" type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username">
+                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username">
 
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">
@@ -129,14 +130,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-function changetextbox()
-{
-    if (document.getElementById("status").value === "guru") {
-        document.getElementById("kelas").disable='true';
-    } else {
-        document.getElementById("kelas").disable='false';
-    }
-}
-</script>
 @endsection
