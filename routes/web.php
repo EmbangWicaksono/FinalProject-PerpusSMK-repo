@@ -15,13 +15,17 @@
 //     return view('welcome');
 // });
 
-Route::get('/pengunjung', function()  {
-    return view('pages.visitor');
-});
+// Route::get('/pengunjung', function()  {
+//     return view('pages.visitor');
+// });
+
 Route::get('/search_book', function () {
     return view('pages.search_book');
 });
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
+Route::resource('user', 'UserController');
 Route::get('/home', 'HomeController@index');
+Route::get('/pengunjung', 'VisitorController@index');
+Route::post('/inputvisitor', 'VisitorController@check_id')->name('pengunjung.check');
