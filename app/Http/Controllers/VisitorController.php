@@ -30,7 +30,7 @@ class VisitorController extends Controller
             $this->insert_visitor($check);
             return redirect('/pengunjung');
         } else {
-            return redirect('/pengunjung')->with('error', 'tidak ditemukan');
+            return redirect('/pengunjung')->with('error', 'nomor induk tidak ditemukan');
         }
     }
     public function insert_visitor($data)

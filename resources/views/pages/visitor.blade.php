@@ -1,11 +1,20 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 @section('content')
     <div class="container">
         <h1>Pengunjung perpustakaan</h1>
         {!! Form::open(['action' => 'VisitorController@check_id']) !!}
-        {!! Form::text('username', '', ['placeholder' => 'Masukkan Nomor Induk']) !!}
-        {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              {!! Form::text('username', '', ['placeholder' => 'Masukkan Nomor Induk', 'class' => 'form-control']) !!}
+            </div>
+          </div>
+          <div class="col-md-2">
+            {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+          </div>
+        </div>
         {!! Form::close() !!}
+        @include('component.messages')
         @if (count($today)>0)
         <div class='table-responsive'>
             <!--Table-->
