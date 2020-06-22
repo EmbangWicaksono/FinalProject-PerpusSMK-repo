@@ -29,10 +29,10 @@
                     @auth
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Peminjaman</a>
+                            <a href="/pinjam/{{Auth::user()->id}}" class="nav-link">Peminjaman</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Riwayat Pinjam</a>
+                            <a href="/pinjam/{{Auth::user()->id}}" class="nav-link">Riwayat Pinjam</a>
                             </li>
                             <li class="nav-item">
                             <a href="/profile/{{Auth::user()->username}}" class="nav-link">Profil</a>

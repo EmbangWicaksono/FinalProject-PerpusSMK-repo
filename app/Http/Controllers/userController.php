@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 
 class userController extends Controller
 {
@@ -68,7 +70,18 @@ class userController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->username = $request->input('username');
+        $user->name = $request->input('name');
+        $user->status = $request->input('status');
+        $user->{'jenis kelamin'} = $request->input('jenis_kelamin');
+        $user->telepon = $request->input('telepon');
+        $user->password = Hash::make($request->input('newpass'));
+        $user->save();
+        $profile = $user;
+        $success = 'Data Telah Diubah';
+        return view('pages.profile', compact('profile','success'));
+        //  echo $request;
     }
 
     /**

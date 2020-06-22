@@ -48,4 +48,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\fine', 'ID anggota');
     }
+    public function loan()
+    {
+        return $this->hasMany('App\loan','ID anggota');
+    }
 }
