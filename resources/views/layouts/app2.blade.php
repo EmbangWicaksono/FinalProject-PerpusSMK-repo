@@ -24,9 +24,8 @@
 </head>
 <body>
     <div id="app">
-        <main class="py-4">
+        @include('component.navbar')
             @yield('content')
-        </main>
     </div>
 </body>
 </html>

@@ -29,3 +29,8 @@ Route::resource('user', 'UserController');
 Route::get('/home', 'HomeController@index');
 Route::get('/pengunjung', 'VisitorController@index');
 Route::post('/inputvisitor', 'VisitorController@check_id')->name('pengunjung.check');
+Route::get('/profile/{username}', function ($username) {
+    $user = App\User::where('username',$username)->first();
+
+    return view('pages.profile')->with('profile', $user);
+});
