@@ -56,7 +56,7 @@
                       <div class="form-group row">
                         <label for="newpass" class="col-4 col-form-label">Ganti Password</label> 
                         <div class="col-8">
-                        <input id="newpass" name="newpass" placeholder="Masukkan Password baru" class="form-control here" type="text" value="{{Auth::user()->password}}">
+                        <input id="newpass" name="newpass" class="form-control here" type="password">
                         </div>
                       </div>
                       <div class="form-group row">

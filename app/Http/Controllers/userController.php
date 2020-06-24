@@ -76,12 +76,13 @@ class userController extends Controller
         $user->status = $request->input('status');
         $user->{'jenis kelamin'} = $request->input('jenis_kelamin');
         $user->telepon = $request->input('telepon');
-        $user->password = Hash::make($request->input('newpass'));
+        if ($request->has('newpass') && !empty($request->input('newpass'))) {
+            $user->password = Hash::make($request->input('newpass'));
+        }
         $user->save();
         $profile = $user;
         $success = 'Data Profil telah diubah';
         return redirect('/')->with('success', $success);
-        //  echo $request;
     }
 
     /**

@@ -1,2 +1,2 @@
-{{$profile}}
-{{$success}}
+{{$profile->password}}
+{{-- {{$success}} --}}
