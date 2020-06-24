@@ -1,16 +1,15 @@
 @extends('layouts.app')
 @section('content')
-@include('component.messages')
 <div class="col-md-9">
     <div class="card">
         <div class="card-body">
-            <div class="row">
+          <div class="row">
                 <div class="col-md-12">
                     <h4>Your Profile</h4>
                     <hr>
                 </div>
-            </div>
-            <div class="row">
+          </div>
+          <div class="row">
                 <div class="col-md-12">
                 <form action="/user/{{Auth::user()->id}}" method="POST">
                       <div class="form-group row">
@@ -57,19 +56,19 @@
                       <div class="form-group row">
                         <label for="newpass" class="col-4 col-form-label">Ganti Password</label> 
                         <div class="col-8">
-                          <input id="newpass" name="newpass" placeholder="Masukkan Password baru" class="form-control here" type="text">
+                        <input id="newpass" name="newpass" placeholder="Masukkan Password baru" class="form-control here" type="text" value="{{Auth::user()->password}}">
                         </div>
                       </div>
                       <div class="form-group row">
                           {{csrf_field()}}
                           <input type="hidden" name="_method" value="PUT">
                         <div class="offset-4 col-8">
-                          <button name="submit" type="submit" class="btn btn-primary">Update My Profile</button>
+                          <button name="submit" type="submit" class="btn btn-primary">Perbaharui Profile</button>
                         </div>
                       </div>
                     </form>
                 </div>
-            </div>
+          </div>
             
         </div>
     </div>

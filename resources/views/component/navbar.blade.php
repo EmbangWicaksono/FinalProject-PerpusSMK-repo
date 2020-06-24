@@ -29,16 +29,16 @@
                     @auth
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                            <a href="/pinjam/{{Auth::user()->id}}" class="nav-link">Peminjaman</a>
+                            <a href="/book/pinjam/{{Auth::user()->id}}" class="nav-link">Peminjaman</a>
                             </li>
                             <li class="nav-item">
-                            <a href="/pinjam/{{Auth::user()->id}}" class="nav-link">Riwayat Pinjam</a>
+                            <a href="/book/pinjam/{{Auth::user()->id}}" class="nav-link">Riwayat Pinjam</a>
                             </li>
                             <li class="nav-item">
                             <a href="/profile/{{Auth::user()->username}}" class="nav-link">Profil</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Usulan Buku</a>
+                                <a href="/book/suggest" class="nav-link">Usulan Buku</a>
                             </li>
                         </ul>
                     @endauth

@@ -79,8 +79,8 @@ class userController extends Controller
         $user->password = Hash::make($request->input('newpass'));
         $user->save();
         $profile = $user;
-        $success = 'Data Telah Diubah';
-        return view('pages.profile', compact('profile','success'));
+        $success = 'Data Profil telah diubah';
+        return redirect('/')->with('success', $success);
         //  echo $request;
     }
 

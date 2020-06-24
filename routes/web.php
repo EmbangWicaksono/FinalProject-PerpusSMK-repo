@@ -34,5 +34,7 @@ Route::get('/profile/{username}', function ($username) {
 
     return view('pages.profile')->with('profile', $user);
 });
-Route::get('/pinjam/{id}', 'UserbookController@showloan');
+Route::get('/book/suggest', 'UserbookController@suggest_book');
+Route::put('/booksuggest', 'UserbookController@bookstore')->name('inputsuggestion');
+Route::get('/book/pinjam/{id}', 'UserbookController@showloan');
 Route::get('/riwayat/{id}', 'UserController@historyloan');

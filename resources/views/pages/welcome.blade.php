@@ -2,17 +2,18 @@
 @section('content')
 @guest    
 <header class="masthead">
-    <div class="container h-100">
-      <div class="row h-100 align-items-center">
-        <div class="col-12 text-center">
-          <h1 class="font-weight-light">PerpusPGRI2</h1>
-          <p class="lead">Perpustakaan SMK PGRI 2 Salatiga</p>
-        </div>
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-12 text-center">
+        <h1 class="font-weight-light">PerpusPGRI2</h1>
+        <p class="lead">Perpustakaan SMK PGRI 2 Salatiga</p>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 @else
 <header class="masthead">
+  @include('component.messages')
     <div class="container h-100">
       <div class="row h-100 align-items-center">
         <div class="col-12 text-center">
