@@ -33,13 +33,20 @@
                       <div class="form-group row">
                         <label for="jenis_kelamin" class="col-4 col-form-label">Jenis Kelamin</label> 
                         <div class="col-8">
-                            <select name="jenis_kelamin" id="jenis_kelamin" class="form-control @error('jenis_kelamin') is-invalid @enderror">
-                                <option value="Laki-laki">Laki Laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                            </select>
+                          @if ($profile['jenis kelamin'] == 'Laki-laki')
+                          <select name="jenis_kelamin" id="jenis_kelamin" class="form-control @error('jenis_kelamin') is-invalid @enderror">
+                              <option value="Laki-laki" selected>Laki Laki</option>
+                              <option value="Perempuan">Perempuan</option>
+                          </select>
+                          @else
+                          <select name="jenis_kelamin" id="jenis_kelamin" class="form-control @error('jenis_kelamin') is-invalid @enderror">
+                              <option value="Laki-laki">Laki Laki</option>
+                              <option value="Perempuan" selected>Perempuan</option>
+                          </select>
+                          @endif
                         </div>
                       </div>
-                      @if (Auth::user()->kelas != null)
+                      @if ($profile->kelas != null)
                       <div class="form-group row">
                         <label for="kelas" class="col-4 col-form-label">Kelas</label> 
                         <div class="col-8">
