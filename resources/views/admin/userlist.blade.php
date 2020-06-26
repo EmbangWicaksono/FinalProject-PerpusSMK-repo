@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
     <h1 class="mt-4">Anggota</h1>
+    @include('component.messages')
 <div class="card mb-4">
     <div class="card-header">
         <i class="fas fa-user mr-1"></i>
@@ -8,7 +9,7 @@
     </div>
     <div class="card-body">    
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Nomor Induk</th>
@@ -17,6 +18,7 @@
                         <th>Kelas</th>
                         <th>ditambahkan</th>
                         <th>diperbaharui</th>
+                        <th colspan="2"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,8 +28,22 @@
                     <td>{{$item->name}}</td>
                     <td>{{$item->status}}</td>
                     <td>{{$item->kelas}}</td>
-                    <td>{{$item->created_at}}</td>
-                    <td>{{$item->updated_at}}</td>
+                    <td>{{date('d-M-Y h:m:s', strtotime($item->created_at))}}</td>
+                    <td>{{date('d-M-Y h:m:s', strtotime($item->updated_at))}}</td>
+                    <td style="text-align: center">
+                        <a href="user/{{$item->id}}/edit" class="btn btn-info">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                    <td style="text-align: center">
+                        {{-- <a href="#" class="btn btn-danger" onclick="confirm('apakah anda ingin menghapus {{$item->name}}?')">
+                            <i class="fas fa-trash"></i>
+                        </a> --}}
+                        {!! Form::open(['action' => ['UserController@destroy', $item->id], 'method' => 'POST']) !!}
+                        {!! Form::hidden('_method', 'DELETE') !!}
+                        {!! Form::button("<i class='fas fa-trash'></i>", ['class' => 'btn btn-danger', 'type'=>'submit', 'onclick' => "if( ! confirm('Anda yakin ingin menghapus?')){return false;}"]) !!}
+                        {!! Form::close() !!}
+                    </td>
                     </tr>
                     @endforeach
                 </tbody>

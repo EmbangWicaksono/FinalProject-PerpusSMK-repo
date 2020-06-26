@@ -95,6 +95,13 @@ class userController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        if (!isset($user)) {
+            return redirect(route('user.index'))->with('error', 'Data tidak ditemukan!');
+        }
+        $user->visitor()->delete();
+        $user->delete();
+        return redirect(route('user.index'))->with('success', 'data telah dihapus');
     }
 }
