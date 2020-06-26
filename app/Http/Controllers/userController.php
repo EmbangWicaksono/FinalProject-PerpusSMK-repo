@@ -49,7 +49,7 @@ class userController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -60,7 +60,13 @@ class userController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        if (!isset($user)) {
+            return redirect(route('user.index'))->with('error', 'Data tidak ditemukan!');
+        }
+
+        return view('pages.profile')->with('profile', $user);
     }
 
     /**
@@ -101,6 +107,10 @@ class userController extends Controller
             return redirect(route('user.index'))->with('error', 'Data tidak ditemukan!');
         }
         $user->visitor()->delete();
+        $user->reservation()->delete();
+        $user->fine()->delete();
+        $user->loan()->delete();
+
         $user->delete();
         return redirect(route('user.index'))->with('success', 'data telah dihapus');
     }
