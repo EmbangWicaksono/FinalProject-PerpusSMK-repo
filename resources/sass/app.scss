@@ -8,4 +8,12 @@
 @import '~bootstrap/scss/bootstrap';
 
 // //custom
-// @import 'custom';
+// Layout
+@import "layout/dashboard-default";
+@import "layout/dashboard-fixed";
+
+// Navigation
+@import "navigation/nav";
+@import "navigation/topnav";
+@import "navigation/sidenav/sidenav";
+@import "navigation/sidenav/sidenav-dark";

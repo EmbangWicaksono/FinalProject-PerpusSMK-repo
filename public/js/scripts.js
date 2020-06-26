@@ -81,41 +81,45 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/custom.js":
-/*!********************************!*\
-  !*** ./resources/js/custom.js ***!
-  \********************************/
+/***/ "./resources/js/scripts.js":
+/*!*********************************!*\
+  !*** ./resources/js/scripts.js ***!
+  \*********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$(document).ready(function () {
-  $('#status').on('change', function () {
-    var status = $(this).val();
+(function ($) {
+  "use strict"; // Add active state to sidbar nav links
 
-    if (status != "siswa") {
-      $("#kelas_column").hide();
-    } else {
-      $("#kelas_column").show();
+  var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+
+  $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function () {
+    if (this.href === path) {
+      $(this).addClass("active");
     }
+  }); // Toggle the side navigation
+
+  $("#sidebarToggle").on("click", function (e) {
+    e.preventDefault();
+    $("body").toggleClass("sb-sidenav-toggled");
   });
-  $('#dataTable').DataTable();
-});
+})(jQuery);
 
 /***/ }),
 
-/***/ 1:
-/*!**************************************!*\
-  !*** multi ./resources/js/custom.js ***!
-  \**************************************/
+/***/ 2:
+/*!***************************************!*\
+  !*** multi ./resources/js/scripts.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\perpussmk\resources\js\custom.js */"./resources/js/custom.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\perpussmk\resources\js\scripts.js */"./resources/js/scripts.js");
 
 
 /***/ })

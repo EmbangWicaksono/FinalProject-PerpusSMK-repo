@@ -26,3 +26,12 @@ $cyan: #6cb2eb;
     background-position: center;
     background-repeat: no-repeat;
   }
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+// Import spacing variables
+@import "./variables/spacing";
+
+// Import navigation variables
+@import "./variables/navigation";

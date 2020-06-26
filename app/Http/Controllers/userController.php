@@ -15,7 +15,9 @@ class userController extends Controller
      */
     public function index()
     {
-        //
+        $list = User::where('username','!=','adminperpus')->get();
+
+        return view('admin.userlist')->with('list', $list);
     }
 
     /**
