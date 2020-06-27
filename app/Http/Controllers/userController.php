@@ -49,7 +49,9 @@ class userController extends Controller
      */
     public function show($id)
     {
-        
+        $user = User::find($id);
+
+        return view('admin.edituser')->with('profile',$user);
     }
 
     /**

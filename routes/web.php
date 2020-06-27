@@ -39,3 +39,4 @@ Route::put('/booksuggest', 'UserbookController@bookstore')->name('inputsuggestio
 Route::get('/book/pinjam/{id}', 'UserbookController@showloan');
 Route::get('/riwayat/{id}', 'UserController@historyloan');
 Route::get('/dashboard', 'AdminController@index');
+Route::put('users/{user}', 'AdminController@update')->name('update.user');

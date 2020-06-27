@@ -31,7 +31,7 @@
                     <td>{{date('d-M-Y h:m:s', strtotime($item->created_at))}}</td>
                     <td>{{date('d-M-Y h:m:s', strtotime($item->updated_at))}}</td>
                     <td style="text-align: center">
-                        <a href="user/{{$item->id}}/edit" class="btn btn-info">
+                        <a href="user/{{$item->id}}" class="btn btn-info">
                             <i class="fas fa-edit"></i>
                         </a>
                     </td>
