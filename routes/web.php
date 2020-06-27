@@ -40,3 +40,5 @@ Route::get('/book/pinjam/{id}', 'UserbookController@showloan');
 Route::get('/riwayat/{id}', 'UserController@historyloan');
 Route::get('/dashboard', 'AdminController@index');
 Route::put('users/{user}', 'AdminController@update')->name('update.user');
+Route::get('users/add', 'AdminController@adduser');
+Route::post('users/add', 'AdminController@insertuser')->name('insert.user');

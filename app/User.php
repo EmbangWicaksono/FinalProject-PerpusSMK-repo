@@ -56,4 +56,13 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\reservation','id anggota');
     }
+
+    public function isAdmin()
+    {
+        if ($this->status == 'admin') {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
