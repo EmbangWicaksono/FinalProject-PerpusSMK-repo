@@ -1,12 +1,10 @@
 @extends('layouts.dashboard')
 @section('content')
-    <h3 class="mt-4">Anggota Perpustakaan</h3>
+    <h3 class="mt-4 ml-2">Anggota Perpustakaan</h3>
     @include('component.messages')
 <div class="card mb-4">
     <div class="card-header">
-        <i class="fas fa-user mr-1"></i>
-        Daftar Anggota
-        <a href="/users/add" class="btn btn-success float-right">Tambah Anggota<i class="fas fa-user ml-1"></i></a>
+        <a href="/users/add" class="btn btn-success"><i class="fas fa-user ml-1 mr-1"></i>Tambah Anggota</a>
     </div>
     <div class="card-body">    
         <div class="table-responsive">

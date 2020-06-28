@@ -59,10 +59,6 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        if ($this->status == 'admin') {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->where('status','admin')->exists();
     }
 }

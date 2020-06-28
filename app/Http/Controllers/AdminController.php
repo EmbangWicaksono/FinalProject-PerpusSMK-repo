@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Gate;
+use App\Exports\SuggestReport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\User;
+use App\book_suggestion;
 
 class AdminController extends Controller
 {
@@ -15,15 +20,24 @@ class AdminController extends Controller
     }
     public function index()
     {
+        if (Gate::denies('isAdmin')) {
+            return redirect('/');
+        }
         return view('admin.index');
     }
 
     public function edituser()
     {
+        if (Gate::denies('isAdmin')) {
+            return redirect('/');
+        }
         return view('admin.edituser');
     }
     public function adduser()
     {
+        if (Gate::denies('isAdmin')) {
+            return redirect('/');
+        }
         return view('admin.adduser');
     }
 
@@ -78,6 +92,15 @@ class AdminController extends Controller
 
         return redirect('user')->with('success','data berhasil ditambahkan');
     }
+    public function usulanbooks()
+    {
+        $usulan = book_suggestion::orderBy('created_at','desc')->get();
+        return view('admin.suggestion_list')->with('books',$usulan);
+    }
 
+    public function exportsuggest()
+    {
+        return Excel::download(new SuggestReport, 'daftar usulan buku.xlsx');
+    }
 
 }
