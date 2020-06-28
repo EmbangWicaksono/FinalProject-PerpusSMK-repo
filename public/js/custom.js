@@ -103,7 +103,6 @@ $(document).ready(function () {
       $("#kelas_column").show();
     }
   });
-  $('#dataTable').DataTable();
 });
 
 /***/ }),

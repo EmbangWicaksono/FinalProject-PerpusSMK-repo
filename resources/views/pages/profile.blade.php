@@ -15,7 +15,7 @@
                       <div class="form-group row">
                         <label for="username" class="col-4 col-form-label">Nomor Induk</label> 
                         <div class="col-8">
-                        <input id="username" name="username" placeholder="Username" class="form-control here" required="required" type="text" value="{{$profile->username}}">
+                        <input id="username" name="username" placeholder="Username" class="form-control here" required="required" type="text" value="{{$profile->username}}" readonly>
                         </div>
                       </div> 
                       <div class="form-group row">

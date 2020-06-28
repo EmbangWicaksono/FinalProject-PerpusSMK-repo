@@ -27,33 +27,44 @@
                       <div class="form-group row">
                         <label for="status" class="col-4 col-form-label">Status</label> 
                         <div class="col-8">
-                        <input id="status" name="status" placeholder="status" class="form-control here" required="required" type="text" value="{{$profile->status}}" readonly>
+                        {{-- <input id="status" name="status" placeholder="status" class="form-control here" required="required" type="text" value="{{$profile->status}}" readonly> --}}
+                        @if ($profile->status == 'guru')
+                        <select name="status" id="status" class="form-control">
+                          <option value="guru" selected>Guru</option>
+                          <option value="siswa">Siswa</option>
+                        </select>
+                        @else
+                        <select name="status" id="status" class="form-control">
+                          <option value="guru">Guru</option>
+                          <option value="siswa" selected>Siswa</option>
+                        </select>
+                        @endif
                         </div>
                       </div> 
                       <div class="form-group row">
                         <label for="jenis_kelamin" class="col-4 col-form-label">Jenis Kelamin</label> 
                         <div class="col-8">
                           @if ($profile['jenis kelamin'] == 'Laki-laki')
-                          <select name="jenis_kelamin" id="jenis_kelamin" class="form-control @error('jenis_kelamin') is-invalid @enderror">
+                          <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
                               <option value="Laki-laki" selected>Laki Laki</option>
                               <option value="Perempuan">Perempuan</option>
                           </select>
                           @else
-                          <select name="jenis_kelamin" id="jenis_kelamin" class="form-control @error('jenis_kelamin') is-invalid @enderror">
+                          <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
                               <option value="Laki-laki">Laki Laki</option>
                               <option value="Perempuan" selected>Perempuan</option>
                           </select>
                           @endif
                         </div>
                       </div>
-                      @if ($profile->kelas != null)
-                      <div class="form-group row">
+                      {{-- @if ($profile->kelas != null) --}}
+                      <div class="form-group row" id="kelas_column">
                         <label for="kelas" class="col-4 col-form-label">Kelas</label> 
                         <div class="col-8">
                         <input id="kelas" name="kelas" placeholder="Kelas" class="form-control here" required="required" type="text" value="{{$profile->kelas}}">
                         </div>
                       </div>
-                      @endif
+                      {{-- @endif --}}
                       <div class="form-group row">
                         <label for="telepon" class="col-4 col-form-label">Nomor Telepon</label> 
                         <div class="col-8">
