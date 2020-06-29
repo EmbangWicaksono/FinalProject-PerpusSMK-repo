@@ -116,8 +116,11 @@ class AdminController extends Controller
 
     public function penerbitinput(Request $request)
     {
+        $this->validate($request,[
+            'penerbit_name' => 'required|string|unique:publishers,Nama'
+        ]);
         $penerbit = new publisher;
-        $penerbit->Nama = $request->nama;
+        $penerbit->Nama = $request->penerbit_name;
         $penerbit->save();
         return redirect('/penerbit')->with('success','data telah ditambahkan');
 
@@ -145,6 +148,9 @@ class AdminController extends Controller
 
     public function penulisinput(Request $request)
     {
+        $this->validate($request,[
+            'nama' => 'required|string|unique:authors,nama'
+        ]);
         $penulis = new author;
         $penulis->nama = $request->nama;
         $penulis->type = $request->type;

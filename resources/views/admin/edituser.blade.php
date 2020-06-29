@@ -61,14 +61,14 @@
                       <div class="form-group row" id="kelas_column">
                         <label for="kelas" class="col-4 col-form-label">Kelas</label> 
                         <div class="col-8">
-                        <input id="kelas" name="kelas" placeholder="Kelas" class="form-control here" required="required" type="text" value="{{$profile->kelas}}">
+                        <input id="kelas" name="kelas" placeholder="Kelas" class="form-control here" type="text" value="{{$profile->kelas}}">
                         </div>
                       </div>
                       {{-- @endif --}}
                       <div class="form-group row">
                         <label for="telepon" class="col-4 col-form-label">Nomor Telepon</label> 
                         <div class="col-8">
-                        <input id="telepon" name="telepon" placeholder="Nomor Telepon" class="form-control here" required="required" type="text" value="{{$profile->telepon}}">
+                        <input id="telepon" name="telepon" placeholder="Nomor Telepon" class="form-control here" type="text" value="{{$profile->telepon}}">
                         </div>
                       </div>
                       <div class="form-group row">
