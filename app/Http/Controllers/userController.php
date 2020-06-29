@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class userController extends Controller
@@ -14,7 +15,8 @@ class userController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function __construct() {
-        $this->middleware('auth.admin');
+        $this->middleware('auth');
+        $this->middleware('auth.admin')->only('index','destroy');
     }
     public function index()
     {
@@ -24,26 +26,7 @@ class userController extends Controller
         return view('admin.userlist')->with('list', $list);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    
 
     /**
      * Display the specified resource.
@@ -64,16 +47,7 @@ class userController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $user = User::find($id);
-
-        if (!isset($user)) {
-            return redirect(route('user.index'))->with('error', 'Data tidak ditemukan!');
-        }
-
-        return view('pages.profile')->with('profile', $user);
-    }
+    
 
     /**
      * Update the specified resource in storage.

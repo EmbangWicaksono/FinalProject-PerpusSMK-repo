@@ -23,10 +23,10 @@ class CheckAdmin
     public function handle($request, Closure $next)
     {
         if ($this->auth->guest() || $this->auth->user()->status != 'admin') {
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
+            if ($this->auth->guest()) {
                 return redirect()->guest('login');
+            } else {
+                return Abort(401);
             }
         }
         return $next($request);
