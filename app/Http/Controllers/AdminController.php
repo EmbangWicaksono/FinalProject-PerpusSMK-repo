@@ -11,33 +11,35 @@ use App\Exports\SuggestReport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\User;
 use App\book_suggestion;
+use App\publisher;
+use App\author;
 
 class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth.admin');
     }
     public function index()
     {
-        if (Gate::denies('isAdmin')) {
-            return redirect('/');
-        }
+        // if (Gate::denies('isAdmin')) {
+        //     return redirect('/');
+        // }
         return view('admin.index');
     }
 
     public function edituser()
     {
-        if (Gate::denies('isAdmin')) {
-            return redirect('/');
-        }
+        // if (Gate::denies('isAdmin')) {
+        //     return redirect('/');
+        // }
         return view('admin.edituser');
     }
     public function adduser()
     {
-        if (Gate::denies('isAdmin')) {
-            return redirect('/');
-        }
+        // if (Gate::denies('isAdmin')) {
+        //     return redirect('/');
+        // }
         return view('admin.adduser');
     }
 
@@ -101,6 +103,64 @@ class AdminController extends Controller
     public function exportsuggest()
     {
         return Excel::download(new SuggestReport, 'daftar usulan buku.xlsx');
+    }
+
+    public function penerbitget()
+    {
+        if (Gate::denies('isAdmin')) {
+            return redirect('/');
+        }
+        $penerbit = publisher::orderBy('created_at','desc')->get();
+        return view('admin.penerbit')->with('penerbit', $penerbit);
+    }
+
+    public function penerbitinput(Request $request)
+    {
+        $penerbit = new publisher;
+        $penerbit->Nama = $request->nama;
+        $penerbit->save();
+        return redirect('/penerbit')->with('success','data telah ditambahkan');
+
+    }
+
+    public function penerbitdelete($id)
+    {
+        $penerbit = publisher::find($id);
+        if (!isset($penerbit)) {
+            return redirect('/penerbit')->with('error','data tidak ditemukan!');
+        }
+
+        $penerbit->delete();
+        return redirect('/penerbit')->with('success','data telah dihapus');
+    }
+
+    public function penulisget()
+    {   
+        if (Gate::denies('isAdmin')) {
+            return redirect('/');
+        }
+        $penulis = author::orderBy('created_at','desc')->get();
+        return view('admin.penulis')->with('penulis', $penulis);
+    }
+
+    public function penulisinput(Request $request)
+    {
+        $penulis = new author;
+        $penulis->nama = $request->nama;
+        $penulis->type = $request->type;
+        $penulis->save();
+        return redirect('/penulis')->with('success','data telah ditambahkan');
+    }
+
+    public function penulisdelete($id)
+    {
+        $penulis = author::find($id);
+        if (!isset($penulis)) {
+            return redirect('/penulis')->with('error','data tidak ditemukan!');
+        }
+
+        $penulis->delete();
+        return redirect('/penulis')->with('success','data telah dihapus');
     }
 
 }

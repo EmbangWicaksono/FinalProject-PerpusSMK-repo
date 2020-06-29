@@ -16,7 +16,8 @@
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="#">Data Buku</a>
                         <a class="nav-link" href="#">Daftar Buku</a>
-                        <a class="nav-link" href="#">Daftar Penerbit</a>
+                        <a class="nav-link" href="/penerbit">Daftar Penerbit</a>
+                        <a class="nav-link" href="/penulis">Daftar Penulis</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">

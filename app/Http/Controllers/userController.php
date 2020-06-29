@@ -13,10 +13,13 @@ class userController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct() {
+        $this->middleware('auth.admin');
+    }
     public function index()
     {
         $list = User::where('username','!=','adminperpus')
-                        ->orderBy('status','asc')->paginate(5);
+                        ->orderBy('status','asc')->paginate(10);
 
         return view('admin.userlist')->with('list', $list);
     }
