@@ -14,7 +14,7 @@
                 </a>
                 <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="#">Data Buku</a>
+                        <a class="nav-link" href="/addbiblio">Tambah Buku</a>
                         <a class="nav-link" href="#">Daftar Buku</a>
                         <a class="nav-link" href="/penerbit">Daftar Penerbit</a>
                         <a class="nav-link" href="/penulis">Daftar Penulis</a>

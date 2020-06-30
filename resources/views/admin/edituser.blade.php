@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
-<div class="col-md-9">
+<div class="col-md-9 mt-2">
     <div class="card">
         <div class="card-body">
           <div class="row">

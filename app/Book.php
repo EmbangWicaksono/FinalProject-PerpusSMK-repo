@@ -22,4 +22,13 @@ class Book extends Model
     {
         return $this->hasMany('App\book_entry', 'ISBN', 'ISBN');
     }
+
+    public function author()
+    {
+        return $this->belongsToMany('App\author')
+                                    ->using('App\book_author')
+                                    ->withpivot([
+                                        'role',
+                                    ])->withTimestamps();
+    }
 }

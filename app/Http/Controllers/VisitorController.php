@@ -20,8 +20,8 @@ class VisitorController extends Controller
         $check = User::where('username',$request->input('username'))->first();
         
         $today = visitor::whereDate('added_on', Carbon::today())->get();
-        foreach ($today as $today) {
-            if ($today->{'nama pengunjung'} == $check->name) {
+        foreach ($today as $visit) {
+            if ($visit->{'nama pengunjung'} == $check->name) {
                 return redirect('/pengunjung')->with('error', 'pengunjung telah input');
             }
         }

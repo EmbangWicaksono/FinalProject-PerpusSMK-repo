@@ -58,3 +58,4 @@ Route::post('/penulis/add','AdminController@penulisinput');
 Route::delete('/penulis/{id}','AdminController@penulisdelete');
 Route::post('/penerbit/add','AdminController@penerbitinput');
 Route::delete('/penerbit/{id}','AdminController@penerbitdelete');
+Route::get('/addbiblio','AdminbookController@addbiblio');

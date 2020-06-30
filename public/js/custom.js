@@ -102,7 +102,9 @@ $(document).ready(function () {
     } else {
       $("#kelas_column").show();
     }
-  });
+  }); // $("#Tahun_Terbit").datepicker({
+  //     dateFormat: "yy"
+  // });
 });
 
 /***/ }),

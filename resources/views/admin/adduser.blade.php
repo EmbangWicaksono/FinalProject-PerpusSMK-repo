@@ -1,6 +1,5 @@
 @extends('layouts.dashboard')
 @section('content')
-@include('scripts.custom')
 <div class="container">
     <div class="row justify-content-center mt-3">
         <div class="col-md-8">

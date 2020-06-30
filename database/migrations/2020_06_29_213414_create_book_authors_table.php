@@ -13,9 +13,7 @@ class CreateBookAuthorsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('book_authors');
         Schema::create('book_authors', function (Blueprint $table) {
-            // $table->bigIncrements('id');
             $table->char('ISBN_Buku',13);
             $table->bigInteger('author_id')->unsigned();
             $table->string('role');
@@ -24,7 +22,6 @@ class CreateBookAuthorsTable extends Migration
         Schema::table('book_authors', function (Blueprint $table) {
             $table->foreign('ISBN_Buku')->references('ISBN')->on('books');
             $table->foreign('author_id')->references('id')->on('authors');
-            $table->primary(['ISBN_Buku','author_id']);
         });
     }
 
