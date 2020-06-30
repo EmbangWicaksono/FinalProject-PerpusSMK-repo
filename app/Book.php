@@ -25,10 +25,8 @@ class Book extends Model
 
     public function author()
     {
-        return $this->belongsToMany('App\author')
-                                    ->using('App\book_author')
-                                    ->withpivot([
-                                        'role',
-                                    ])->withTimestamps();
+        return $this->belongsToMany('App\author','book_authors','book_id','author_id')
+                                    ->withPivot('role')
+                                    ->withTimestamps();
     }
 }

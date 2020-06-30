@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
             <div class="col-md-12">
-                <form action="" method="post">
+                <form action="/biblioadd" method="post">
                     <div class="form-group row">
                         <label for="ISBN" class="col-4 col-form-label">ISBN</label>
                         <div class="col-8">
@@ -16,9 +16,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="Judul Buku" class="col-4 col-form-label">Judul Buku</label>
+                        <label for="Judul" class="col-4 col-form-label">Judul Buku</label>
                         <div class="col-8">
-                            <input type="text" name="Judul Buku" id="Judul Buku" class="form-control" placeholder="Judul Buku">
+                            <input type="text" name="Judul" id="Judul" class="form-control" placeholder="Judul Buku">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -60,21 +60,46 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="Penulis" class="col-4 col-form-label">Penulis</label>
-                        <div class="input-group col-8">
-                            <input type="text" name="Penulis" id="Penulis" class="form-control">
-                            <select name="role" id="role" class="form-control">
-                                <option value="Penulis Utama">Penulis Utama</option>
-                                <option value="Penulis Kedua">Penulis Kedua</option>
-                                <option value="Redaksi">Redaksi</option>
-                            </select>
+                    <div class="wrap-text">
+                        <div class="form-group row">
+                            <label for="Penulis" class="col-4 col-form-label">Penulis</label>
+                            <div class="input-group col-8">
+                                <input type="text" id="Penulis[]" name="Penulis[]" class="form-control" placeholder="Nama Penulis">
+                                <input type="text"id="role[]" name="role[]" class="form-control" placeholder="Peran">
+                                <div class="input-group-append">
+                                    <button class="btn btn-success add_fields" type="button">+</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
+                    <div class="form-group row">
+                        {{ csrf_field() }}
+                        <div class="offset-4 col-8">
+                          <button name="submit" type="submit" class="btn btn-primary">Tambah Data Buku</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-    
+    <script>
+        $(document).ready(function () {
+            var max_fields      = 5; //maximum input boxes allowed
+	var wrapper   		= $(".wrap-text"); //Fields wrapper
+	var add_button      = $(".add_fields"); //Add button ID
+	
+	var x = 1; //initlal text box count
+	$(add_button).click(function(e){ //on add input button click
+		e.preventDefault();
+		if(x < max_fields){ //max input box allowed
+			x++; //text box increment
+			$(wrapper).append('<div class="form-group row"><div class="input-group offset-4 col-8"><input type="text" id="Penulis[]" name="Penulis[]" class="form-control" placeholder="Nama Penulis"><input type="text" id="role[]" name="role[]"" class="form-control" placeholder="Peran"><div class="input-group-append"><button type="button" class="btn btn-danger remove_field">-</button></div></div></div>'); //add input box
+		}
+	});
+	
+	$(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+		e.preventDefault(); $(this).parent('div').parent('div').parent('div').remove(); x--;
+	})
+        })
+    </script>
 @endsection
