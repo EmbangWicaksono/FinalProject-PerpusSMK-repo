@@ -82,6 +82,25 @@ class AdminbookController extends Controller
         $book_item->{'kode klasifikasi'} = $request->input('kode_k');
         $book_entry->book_item()->save($book_item);
 
-        return redirect('/addcopy')->with('success', 'data telah berhasil dimasukkan');
+        return redirect('/addcopy')->with('success', 'data telah berhasil dimasukkan')->withInput();
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+
+        if($search == ''){
+           $books = Book::orderby('Judul Buku','asc')->select('ISBN','Judul Buku')->limit(5)->get();
+        }else{
+           $books = Book::orderby('Judul Buku','asc')->select('ISBN','Judul Buku')->where('Judul Buku', 'like', '%' .$search . '%')->limit(5)->get();
+        }
+  
+        $response = array();
+        foreach($books as $book){
+           $response[] = array("value"=>$book->ISBN,"label"=>$book->{'Judul Buku'});
+        }
+  
+        return response()->json($response);
+            
+    } 
 }

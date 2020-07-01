@@ -14,4 +14,27 @@
         e.preventDefault();
         $("body").toggleClass("sb-sidenav-toggled");
     });
+    $( "#judul_buku" ).autocomplete({
+        source: function( request, response ) {
+          // Fetch data
+          $.ajax({
+            url:"autocomplete",
+            type: 'post',
+            dataType: "json",
+            data: {
+               _token: CSRF_TOKEN,
+               search: request.term
+            },
+            success: function( data ) {
+               response( data );
+            }
+          });
+        },
+        select: function (event, ui) {
+           // Set selection
+           $('#judul_buku').val(ui.item.label); // display the selected text
+           $('#ISBN').val(ui.item.value); // save selected id to input
+           return false;
+        }
+      });
 })(jQuery);

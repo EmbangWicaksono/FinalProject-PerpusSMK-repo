@@ -63,3 +63,4 @@ Route::get('/listbiblio','AdminbookController@bibliolist');
 Route::post('/biblioadd','AdminbookController@insertbiblio');
 Route::get('/addcopy', 'AdminbookController@additem');
 Route::post('/bookitem','AdminbookController@insertcopy');
+Route::post('autocomplete', 'AdminbookController@search')->name('autocomplete');
