@@ -1,5 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
+    @include('component.messages')
     <div class="card mt-3">
         <div class="card-header">
             <div class="row">

@@ -8,18 +8,31 @@ use Illuminate\Support\Facades\Input;
 use App\publisher;
 use App\author;
 use App\Book;
+use App\book_entry;
+use App\book_item;
 
 class AdminbookController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth.admin');
+    }
     public function addbiblio()
     {
         $publisher = publisher::all();
         return view('admin.biblio')->with('publishers',$publisher);
     }
 
-    public function getAuthor(Request $request)
+    public function additem()
     {
-        # code...
+        return view('admin.copybook');
+    }
+
+    public function bibliolist(Request $request)
+    {
+        $books = Book::orderBy('Judul Buku', 'asc')->get();
+
+        return view('admin.bibliolist')->with('books', $books);
     }
 
     public function insertbiblio(Request $request)
@@ -38,5 +51,37 @@ class AdminbookController extends Controller
         $author_id = author::firstOrCreate(['nama' => $request->input('Penulis.'.$i)],['type' => 'Nama Pribadi']);
         $Book->author()->attach($author_id,['role' => $request->input('role.'.$i)]);
         }
+
+        return redirect('/addbiblio')->with('success', 'Data Berhasil Dimasukkan');
+    }
+
+    public function insertcopy(Request $request)
+    {
+        $this->validate($request,[
+            'ISBN' => 'required',
+            'judul_buku' => 'required|string',
+            'kode' => 'required',
+            'kode_k' => 'required',
+            'sumber' => 'required',
+            'harga' => 'nullable',
+            'Tanggal_Masuk' => 'required'
+        ]);
+        
+        $book_entry = new book_entry;
+        $book_entry->ISBN = $request->input('ISBN');
+        $book_entry->{'tanggal masuk'} = $request->input('Tanggal_Masuk');
+        $book_entry->Sumber = $request->input('sumber');
+        $book_entry->harga = $request->input('harga');
+        $book_entry->save();
+
+        $book_item = new book_item;
+        $book_item->ISBN = $request->input('ISBN');
+        $book_item->{'judul buku'} = $request->input('judul_buku');
+        $book_item->{'kode buku'} = $request->input('kode');
+        $book_item->kondisi = $request->input('kondisi');
+        $book_item->{'kode klasifikasi'} = $request->input('kode_k');
+        $book_entry->book_item()->save($book_item);
+
+        return redirect('/addcopy')->with('success', 'data telah berhasil dimasukkan');
     }
 }
