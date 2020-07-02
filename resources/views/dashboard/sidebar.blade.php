@@ -30,7 +30,7 @@
                         <a class="nav-link" href="#">Peminjaman</a>
                         <a class="nav-link" href="#">Pengembalian</a>
                         <a class="nav-link" href="#">Reservasi</a>
-                        <a class="nav-link" href="#">Denda</a>
+                        <a class="nav-link" href="/transaction/denda">Denda</a>
                     </nav>
                 </div>
                 <a class="nav-link" href="/usulanbuku">
