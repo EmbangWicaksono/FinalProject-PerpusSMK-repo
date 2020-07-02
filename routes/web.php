@@ -66,3 +66,4 @@ Route::post('/bookitem','AdminbookController@insertcopy');
 Route::post('autocomplete', 'AdminbookController@search')->name('autocomplete');
 Route::get('/showcopy/{id}', 'AdminbookController@showcopy');
 Route::get('/listitem', 'AdminbookController@itemlist');
+Route::put('/editcopy/{book}', 'AdminbookController@editcopy')->name('update.copy');

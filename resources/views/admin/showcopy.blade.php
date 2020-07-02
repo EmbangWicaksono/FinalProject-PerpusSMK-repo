@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
             <div class="col-md-12">
-                <form action="/bookitem" method="POST">
+                <form action="/editcopy/{{$book_item->book_entry->id}}" method="POST">
                     <div class="form-group row">
                         <label for="ISBN" class="col-4 col-form-label">ISBN</label>
                         <div class="col-8">
@@ -80,7 +80,7 @@
                     <div class="form-group row">
                         <label for="Tanggal_Masuk" class="col-4 col-form-label">Tanggal Masuk</label>
                         <div class="col-8">
-                        <input type="date" name="Tanggal_Masuk" id="Tanggal_Masuk" class="form-control" value="{{date('d-M-Y', strtotime($book_item->book_entry['tanggal masuk']))}}">
+                        <input type="date" name="Tanggal_Masuk" id="Tanggal_Masuk" class="form-control" value="{{date('Y-m-d', strtotime($book_item->book_entry['tanggal masuk']))}}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -90,7 +90,7 @@
                                 <div class="input-group-prepend">
                                   <span class="input-group-text">Rp.</span>
                                 </div>
-                            <input type="number" class="form-control @error('harga') is-invalid @enderror" id="harga" name="harga" min="1" placeholder="1000" value="{{number_format($book_item->book_entry->harga)}}">
+                            <input type="number" class="form-control @error('harga') is-invalid @enderror" id="harga" name="harga" min="1" placeholder="1000" value="{{$book_item->book_entry->harga}}">
                                 <div class="input-group-append">
                                   <span class="input-group-text">.00</span>
                                 </div>
@@ -105,6 +105,7 @@
                     <div class="form-group row">
                         <div class="offset-4 col-8">
                             {{ csrf_field() }}
+                            <input type="hidden" name="_method" value="PUT">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </div>

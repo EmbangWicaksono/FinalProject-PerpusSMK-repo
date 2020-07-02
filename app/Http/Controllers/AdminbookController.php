@@ -114,7 +114,33 @@ class AdminbookController extends Controller
     public function showcopy($id)
     {
         $book_item = book_item::where('kode buku', $id)->firstOrFail();
-        // return $book_item->book_entry->harga;
         return view('admin.showcopy')->with('book_item', $book_item);
+    }
+
+    public function editcopy(Request $request, $id)
+    {
+        $book_entry = book_entry::findOrFail($id);
+        $this->validate($request,[
+            'ISBN' => 'required',
+            'judul_buku' => 'required|string',
+            'kode' => 'required',
+            'kode_k' => 'required',
+            'sumber' => 'required',
+            'harga' => 'nullable',
+            'Tanggal_Masuk' => 'required'
+        ]);
+
+        $book_entry->ISBN = $request->input('ISBN');
+        $book_entry->Sumber = $request->input('sumber');
+        $book_entry->harga = $request->input('harga');
+        $book_entry->{'tanggal masuk'} = $request->input('Tanggal_Masuk');
+        $book_entry->book_item->{'judul buku'} = $request->input('judul_buku');
+        $book_entry->book_item->{'kode buku'} = $request->input('kode');
+        $book_entry->book_item->{'kode klasifikasi'} = $request->input('kode_k');
+        $book_entry->book_item->kondisi = $request->input('kondisi');
+        $book_entry->push();
+
+        return redirect('/listitem')->with('success', 'data berhasil data berhasil diperbaharui!');
+
     }
 }

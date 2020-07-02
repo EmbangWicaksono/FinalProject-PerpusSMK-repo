@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
     <h2 class="mt-4">Daftar Salinan</h2>
+    @include('component.messages')
 <div class="card">
     <div class="card-header">
         <a href="/addcopy" class="btn btn-success float-right">Tambah Salinan</a>
