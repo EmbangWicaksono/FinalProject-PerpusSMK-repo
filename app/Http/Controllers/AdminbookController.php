@@ -28,11 +28,18 @@ class AdminbookController extends Controller
         return view('admin.copybook');
     }
 
-    public function bibliolist(Request $request)
+    public function bibliolist()
     {
-        $books = Book::orderBy('Judul Buku', 'asc')->get();
+        $books = Book::orderBy('Judul Buku', 'asc')->paginate(10);
 
         return view('admin.bibliolist')->with('books', $books);
+    }
+
+    public function itemlist()
+    {
+        $books = book_item::orderBy('kode buku', 'asc')->paginate(10);
+
+        return view('admin.copylist')->with('books', $books);
     }
 
     public function insertbiblio(Request $request)
@@ -60,8 +67,8 @@ class AdminbookController extends Controller
         $this->validate($request,[
             'ISBN' => 'required',
             'judul_buku' => 'required|string',
-            'kode' => 'required',
-            'kode_k' => 'required',
+            'kode' => 'required|unique:book_items,kode buku',
+            'kode_k' => 'required|unique:book_items,kode klasifikasi',
             'sumber' => 'required',
             'harga' => 'nullable',
             'Tanggal_Masuk' => 'required'
@@ -102,5 +109,12 @@ class AdminbookController extends Controller
   
         return response()->json($response);
             
-    } 
+    }
+    
+    public function showcopy($id)
+    {
+        $book_item = book_item::where('kode buku', $id)->firstOrFail();
+        // return $book_item->book_entry->harga;
+        return view('admin.showcopy')->with('book_item', $book_item);
+    }
 }
