@@ -36,6 +36,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{$penulis->links()}}
             </div>
             @else
                 <div class="alert alert-warning">

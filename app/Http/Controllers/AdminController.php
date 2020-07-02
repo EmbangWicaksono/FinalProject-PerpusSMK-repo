@@ -110,7 +110,7 @@ class AdminController extends Controller
         if (Gate::denies('isAdmin')) {
             return redirect('/');
         }
-        $penerbit = publisher::orderBy('created_at','desc')->get();
+        $penerbit = publisher::orderBy('created_at','desc')->paginate(5);
         return view('admin.penerbit')->with('penerbit', $penerbit);
     }
 
@@ -142,7 +142,7 @@ class AdminController extends Controller
         if (Gate::denies('isAdmin')) {
             return redirect('/');
         }
-        $penulis = author::orderBy('created_at','desc')->get();
+        $penulis = author::orderBy('created_at','desc')->paginate(5);
         return view('admin.penulis')->with('penulis', $penulis);
     }
 

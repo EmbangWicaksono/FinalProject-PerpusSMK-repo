@@ -120,6 +120,7 @@ class AdminbookController extends Controller
     {
         $book = Book::where('ISBN',$id)->firstOrFail();
         echo $book;
+        echo $book->author;
         // return view('admin.showbiblio')->with('book', $book);
     }
 

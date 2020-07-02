@@ -32,6 +32,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{$penerbit->links()}}
             </div>
             @else
                 <div class="alert alert-warning">
