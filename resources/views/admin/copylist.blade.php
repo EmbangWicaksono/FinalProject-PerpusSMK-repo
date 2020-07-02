@@ -30,7 +30,7 @@
                         <td>{{date('d-M-Y', strtotime($book->book_entry['tanggal masuk']))}}</td>
                         <td>{{$book->book_entry->Sumber}}</td>
                         <td>
-                            {!! Form::open(['action' => ['UserController@destroy', $book->ISBN], 'method' => 'POST']) !!}
+                            {!! Form::open(['action' => ['AdminbookController@deletecopy', $book->book_entry->id], 'method' => 'POST']) !!}
                             {!! Form::hidden('_method', 'DELETE') !!}
                             {!! Form::button("<i class='fas fa-trash'></i>", ['class' => 'btn btn-danger', 'type'=>'submit', 'onclick' => "if( ! confirm('Anda yakin ingin menghapus?')){return false;}"]) !!}
                             {!! Form::close() !!}

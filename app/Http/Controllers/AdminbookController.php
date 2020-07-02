@@ -116,6 +116,12 @@ class AdminbookController extends Controller
         $book_item = book_item::where('kode buku', $id)->firstOrFail();
         return view('admin.showcopy')->with('book_item', $book_item);
     }
+    public function showbiblio($id)
+    {
+        $book = Book::where('ISBN',$id)->firstOrFail();
+        echo $book;
+        // return view('admin.showbiblio')->with('book', $book);
+    }
 
     public function editcopy(Request $request, $id)
     {
@@ -142,5 +148,28 @@ class AdminbookController extends Controller
 
         return redirect('/listitem')->with('success', 'data berhasil data berhasil diperbaharui!');
 
+    }
+    public function editbiblio(Request $request, $id)
+    {
+        # code...
+    }
+
+    public function deletecopy($id)
+    {
+        $book_entry = book_entry::findOrFail($id);
+
+        $book_entry->delete();
+
+        return redirect('/listitem')->with('success', 'data berhasil dihapus!');
+    }
+
+    public function deletebiblio($id)
+    {
+        $book = Book::where('ISBN',$id)->firstOrFail();
+        foreach ($book->author as $author) {
+            $book->author()->detach($author->id);
+        }
+        $book->delete();
+        return redirect('/listbiblio')->with('success', 'data berhasil dihapus!');
     }
 }

@@ -22,7 +22,7 @@
                 <tbody>
                     @foreach ($books as $book)
                     <tr>
-                        <td><a href="#" class="btn btn-info"><i class="fas fa-edit"></i></a></td>
+                    <td><a href="/showbiblio/{{$book->ISBN}}" class="btn btn-info"><i class="fas fa-edit"></i></a></td>
                         <td>{{$book['Judul Buku']}}
                             <small>Oleh @foreach ($book->author as $author)
                                 <span class="badge badge-secondary">{{$author->nama}}</span>
@@ -33,7 +33,7 @@
                         <td>{{$book->Klasifikasi}}</td>
                         <td>{{$book->Bahasa}}</td>
                         <td>
-                            {!! Form::open(['action' => ['UserController@destroy', $book->ISBN], 'method' => 'POST']) !!}
+                            {!! Form::open(['action' => ['AdminbookController@deletebiblio', $book->ISBN], 'method' => 'POST']) !!}
                             {!! Form::hidden('_method', 'DELETE') !!}
                             {!! Form::button("<i class='fas fa-trash'></i>", ['class' => 'btn btn-danger', 'type'=>'submit', 'onclick' => "if( ! confirm('Anda yakin ingin menghapus?')){return false;}"]) !!}
                             {!! Form::close() !!}
