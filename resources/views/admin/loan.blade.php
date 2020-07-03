@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
     <h3 class="mt-4 ml-3 mb-3">Peminjaman Anggota</h3>
-    <form action="/issue/showmember" method="get">
+    <form action="/loan/showmember" method="get">
         @csrf
     <div class="form-group row col-md-12">
         <input type="text" name="id" id="id" class="form-control col-3 ml-3" placeholder="No.Induk Anggota">
@@ -47,11 +47,10 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="/insertfine" method="POST">
+                <form action="/insertloan" method="POST">
                 @csrf
-                <div class="input-group">
-                    <input type="text" name="jenis" id="jenis" class="form control col-4" placeholder="Jenis Denda">
-                    <input type="number" name="total" id="total" class="form control ml-3 col-4" placeholder="Total Denda">
+                <div class="input-group mb-2">
+                    <input type="text" name="kode" id="kode" class="form control col-4" placeholder="Kode Buku">
                     <input type="hidden" name="id" id="id" value="{{$user->id}}">
                     <button type="submit" class="btn btn-success ml-3" value='button2'><i class="fas fa-save"></i></button>
                 </div>
@@ -59,19 +58,33 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Jenis Denda</th>
-                            <th>Total Denda</th>
+                            <th>Kode Buku</th>
+                            <th>Judul Buku</th>
+                            <th>Tanggal Pinjam</th>
+                            <th>Batas Kembali</th>
+                            <th>Tanggal Kembali</th>
+                            <th>Perpanjang</th>
                         </tr>
                         <tbody>
-                            @if (count($user->fine) > 0)
-                                @foreach ($user->fine as $fine)
+                            @if (count($user->book_item) > 0)
+                                @foreach ($user->book_item as $loan)
                                 <tr>
-                                    <td>{{$fine['jenis denda']}}</td>
-                                    <td>{{$fine['total denda']}}</td>
+                                <td>{{$loan['kode buku']}}</td>
+                                <td>{{$loan['judul buku']}}</td>
+                                <td>{{$loan->pivot['tanggal pinjam']}}</td>
+                                <td>{{$loan->pivot['batas kembali']}}</td>
+                                <td>{{$loan->pivot['tanggal kembali']}}</td>
+                                <td>
+                                    @if ($loan->pivot->perpanjang == 1)
+                                        <div class="font-weight-bold text-danger ">diperpanjang</div>
+                                    @else
+                                <a href="/perpanjang/{{$loan->pivot->id}}" class="btn btn-secondary">perpanjang</a>
+                                    @endif
+                                </td>
                                 </tr>
                                 @endforeach
                             @else
-                                <td colspan="2" class="table-danger">Tidak memiliki denda yang belum dibayar!</td>
+                                <td colspan="6" class="table-danger" style="text-align: center">tidak ada buku yang dipinjam!</td>
                             @endif
                         </tbody>
                     </thead>

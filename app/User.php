@@ -48,9 +48,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\fine', 'ID anggota');
     }
-    public function loan()
+    public function book_item()
     {
-        return $this->hasMany('App\loan','ID anggota');
+        return $this->belongsToMany('App\book_item', 'loans', 'ID anggota', 'kode buku')
+                                    ->using('App\loan')
+                                    ->withPivot('nama peminjam','judul buku','tanggal pinjam','batas kembali','tanggal kembali','perpanjang','id')
+                                    ->withTimestamps();
     }
     public function reservation()
     {

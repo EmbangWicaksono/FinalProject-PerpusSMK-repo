@@ -46,6 +46,7 @@ Route::get('/book/suggest', 'UserbookController@suggest_book');
 Route::put('/booksuggest', 'UserbookController@bookstore')->name('inputsuggestion');
 Route::get('/book/pinjam/{id}', 'UserbookController@showloan');
 Route::get('/riwayat/{id}', 'UserController@historyloan');
+
 Route::get('/dashboard', 'AdminController@index');
 Route::put('users/{user}', 'AdminController@update')->name('update.user');
 Route::get('users/add', 'AdminController@adduser');
@@ -58,6 +59,7 @@ Route::post('/penulis/add','AdminController@penulisinput');
 Route::delete('/penulis/{id}','AdminController@penulisdelete');
 Route::post('/penerbit/add','AdminController@penerbitinput');
 Route::delete('/penerbit/{id}','AdminController@penerbitdelete');
+
 Route::get('/addbiblio','AdminbookController@addbiblio');
 Route::get('/listbiblio','AdminbookController@bibliolist');
 Route::post('/biblioadd','AdminbookController@insertbiblio');
@@ -70,7 +72,12 @@ Route::get('/listitem', 'AdminbookController@itemlist');
 Route::put('/editcopy/{book}', 'AdminbookController@editcopy')->name('update.copy');
 Route::delete('/deletecopy/{id}', 'AdminbookController@deletecopy');
 Route::delete('/deletebiblio/{id}', 'AdminbookController@deletebiblio');
+
 Route::get('/transaction/denda', 'TransactionController@transactionissue');
+Route::get('/transaction/pinjam', 'TransactionController@transactionloan');
 Route::get('/issue/showmember', 'TransactionController@showmemberissue');
+Route::get('/loan/showmember', 'TransactionController@showmemberloan');
 Route::post('/insertfine', 'TransactionController@addfine');
+Route::post('/insertloan', 'TransactionController@addloan');
 Route::delete('/deletefine/{id}', 'TransactionController@deletefine');
+Route::get('/perpanjang/{id}', 'TransactionController@perpanjang');

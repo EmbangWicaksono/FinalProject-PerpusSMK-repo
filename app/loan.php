@@ -3,15 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class loan extends Model
+class loan extends Pivot
 {
-    public function user()
-    {
-        return $this->belongsTo('App\User', 'ID anggota');
-    }
-    public function book_item()
-    {
-        return $this->belongsTo('App\book_item', 'kode buku', 'kode buku');
-    }
+    protected $table = 'loans';
+    public $incrementing = true;
 }

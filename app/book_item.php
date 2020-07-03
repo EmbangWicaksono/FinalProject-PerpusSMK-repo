@@ -17,4 +17,14 @@ class book_item extends Model
     {
         return $this->belongsTo('App\Book', 'ISBN', 'ISBN');
     }
+
+    public function user()
+    {
+        return $this->belongsToMany('App\User', 'loans', 'kode buku', 'ID anggota')
+                                    ->using('App\loan')
+                                    ->withPivot('nama peminjam','judul buku','tanggal pinjam','batas kembali','tanggal kembali','perpanjang','id')
+                                    ->withTimestamps();
+    }
+
+
 }
