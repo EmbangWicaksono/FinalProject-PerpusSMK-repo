@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 @section('content')
-    <h3 class="mt-4 ml-3 mb-3">Peminjaman Anggota</h3>
+    <h3 class="mt-4 ml-3 mb-3">Riwayat Peminjaman Anggota</h3>
     @include('component.messages')
-    <form action="/loan/showmember" method="get">
+    <form action="/history/showmember" method="get">
         @csrf
     <div class="form-group row col-md-12">
         <input type="text" name="id" id="id" class="form-control col-3 ml-3" placeholder="No.Induk Anggota">
@@ -48,14 +48,6 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="/insertloan" method="POST">
-                @csrf
-                <div class="input-group mb-2">
-                    <input type="text" name="kode" id="kode" class="form control col-4" placeholder="Kode Buku">
-                    <input type="hidden" name="id" id="id" value="{{$user->id}}">
-                    <button type="submit" class="btn btn-success ml-3" value='button2'><i class="fas fa-save"></i></button>
-                </div>
-                </form>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -63,33 +55,21 @@
                             <th>Judul Buku</th>
                             <th>Tanggal Pinjam</th>
                             <th>Batas Kembali</th>
-                            <th>Buku Kembali</th>
-                            <th>Perpanjang</th>
+                            <th>Tanggal Kembali</th>
                         </tr>
                         <tbody>
-                            @if (count($user->loanitem) > 0)
-                                @foreach ($user->loanitem as $loan)
+                            @if (count($user->book_item) > 0)
+                                @foreach ($user->book_item as $loan)
                                 <tr>
                                 <td>{{$loan['kode buku']}}</td>
                                 <td>{{$loan['judul buku']}}</td>
                                 <td>{{$loan->pivot['tanggal pinjam']}}</td>
                                 <td>{{$loan->pivot['batas kembali']}}</td>
-                                <td style="text-align: center">
-                                    <form action="/return_book" method="get">
-                                        @csrf
-                                    <input type="hidden" name="id" id="id" value="{{$loan->pivot->id}}">
-                                    <button type="submit" class="btn btn-secondary">buku kembali</button>
-                                    </form>
-                                </td>
-                                <td style="text-align: center">
-                                    @if ($loan->pivot->perpanjang == 1)
-                                        <div class="font-weight-bold text-danger ">diperpanjang</div>
+                                <td>
+                                    @if ($loan->pivot['tanggal kembali'] == NULL)
+                                        belum kembali
                                     @else
-                                <form action="/perpanjang" method="get">
-                                    @csrf
-                                    <input type="hidden" name="id" id="id" value="{{$loan->pivot->id}}">
-                                    <button type="submit" class="btn btn-secondary">perpanjang</button>
-                                </form>
+                                    {{$loan->pivot['tanggal kembali']}}
                                     @endif
                                 </td>
                                 </tr>

@@ -14,15 +14,17 @@ class UserbookController extends Controller
     }
     public function showloan($id)
     {
-        $user = User::find($id)->loan()->where('tanggal kembali', '')->get();
+        $user = $user = User::findOrFail($id);
+        $loan = $user->loanitem;
 
-        return view('pages.loan')->with('loan', $user);
+        return view('pages.loan')->with('loan', $loan);
     }
 
     public function historyloan($id)
     {
-        $user = User::find($id)->loan()->get();
-        return view('pages.loan')->with('loan', $user);
+        $user = $user = User::findOrFail($id);
+        $loan = $user->book_item;
+        return view('pages.history')->with('loan', $loan);
     }
 
     public function suggest_book()

@@ -23,16 +23,36 @@ class TransactionController extends Controller
     {
         return view('admin.loan');
     }
+    public function transactionhistory()
+    {
+        return view('admin.history');
+    }
 
     public function showmemberissue(Request $request)
     {
-        $user = User::where('username',$request->id)->firstOrFail();
+        $user = User::where('username',$request->id)->first();
+        if (!isset($user)) {
+            return redirect()->back()->with('error','nomor induk tidak ditemukan');
+        }
         return view('admin.issuepage')->with('user', $user);
     }
     public function showmemberloan(Request $request)
     {
-        $user = User::where('username',$request->id)->firstOrFail();
+        $user = User::where('username',$request->id)->first();
+        
+        if (!isset($user)) {
+            return redirect()->back()->with('error','nomor induk tidak ditemukan');
+        }
         return view('admin.loan')->with('user', $user);
+    }
+    public function showmemberhistory(Request $request)
+    {
+        $user = User::where('username',$request->id)->first();
+        
+        if (!isset($user)) {
+            return redirect()->back()->with('error','nomor induk tidak ditemukan');
+        }
+        return view('admin.history')->with('user', $user);
     }
 
     public function addfine(Request $request)
@@ -67,9 +87,9 @@ class TransactionController extends Controller
         return redirect()->back();
     }
 
-    public function perpanjang($id)
+    public function perpanjang(Request $request)
     {
-        $loan = loan::findOrFail($id);
+        $loan = loan::findOrFail($request->input('id'));
         $date = Carbon::createFromFormat('Y-m-d',$loan->{'batas kembali'});
         $date = $date->addDays(3)->format('Y-m-d');
         $loan->{'batas kembali'} = $date;
@@ -77,5 +97,14 @@ class TransactionController extends Controller
         $loan->save();
         return redirect()->back();
 
+    }
+
+    public function returnbook(Request $request)
+    {
+        $loan = loan::findOrFail($request->input('id'));
+        $date = Carbon::now()->format('Y-m-d');
+        $loan->{'tanggal kembali'} = $date;
+        $loan->save();
+        return redirect()->back();
     }
 }

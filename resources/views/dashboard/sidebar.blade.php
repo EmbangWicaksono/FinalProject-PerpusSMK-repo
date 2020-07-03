@@ -28,7 +28,7 @@
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="/transaction/pinjam">Peminjaman</a>
-                        <a class="nav-link" href="#">Pengembalian</a>
+                        <a class="nav-link" href="/transaction/history">Riwayat Pinjam</a>
                         <a class="nav-link" href="#">Reservasi</a>
                         <a class="nav-link" href="/transaction/denda">Denda</a>
                     </nav>

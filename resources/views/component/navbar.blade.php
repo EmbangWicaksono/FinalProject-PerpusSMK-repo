@@ -32,14 +32,16 @@
                             <a href="/book/pinjam/{{Auth::user()->id}}" class="nav-link">Peminjaman</a>
                             </li>
                             <li class="nav-item">
-                            <a href="/book/pinjam/{{Auth::user()->id}}" class="nav-link">Riwayat Pinjam</a>
+                            <a href="/book/history/{{Auth::user()->id}}" class="nav-link">Riwayat Pinjam</a>
                             </li>
                             <li class="nav-item">
                             <a href="/profile/{{Auth::user()->username}}" class="nav-link">Profil</a>
                             </li>
+                            @if (Auth::user()->status == 'guru')
                             <li class="nav-item">
                                 <a href="/book/suggest" class="nav-link">Usulan Buku</a>
                             </li>
+                            @endif
                         </ul>
                     @endauth
 

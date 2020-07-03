@@ -45,7 +45,7 @@ Route::get('/profile/{username}', function ($username) {
 Route::get('/book/suggest', 'UserbookController@suggest_book');
 Route::put('/booksuggest', 'UserbookController@bookstore')->name('inputsuggestion');
 Route::get('/book/pinjam/{id}', 'UserbookController@showloan');
-Route::get('/riwayat/{id}', 'UserController@historyloan');
+Route::get('/book/history/{id}', 'UserbookController@historyloan');
 
 Route::get('/dashboard', 'AdminController@index');
 Route::put('users/{user}', 'AdminController@update')->name('update.user');
@@ -75,9 +75,12 @@ Route::delete('/deletebiblio/{id}', 'AdminbookController@deletebiblio');
 
 Route::get('/transaction/denda', 'TransactionController@transactionissue');
 Route::get('/transaction/pinjam', 'TransactionController@transactionloan');
+Route::get('/transaction/history', 'TransactionController@transactionhistory');
 Route::get('/issue/showmember', 'TransactionController@showmemberissue');
 Route::get('/loan/showmember', 'TransactionController@showmemberloan');
+Route::get('/history/showmember', 'TransactionController@showmemberhistory');
 Route::post('/insertfine', 'TransactionController@addfine');
 Route::post('/insertloan', 'TransactionController@addloan');
 Route::delete('/deletefine/{id}', 'TransactionController@deletefine');
-Route::get('/perpanjang/{id}', 'TransactionController@perpanjang');
+Route::get('/perpanjang', 'TransactionController@perpanjang');
+Route::get('/return_book', 'TransactionController@returnbook');

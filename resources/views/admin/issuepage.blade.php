@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
     <h3 class="mt-4 ml-3 mb-3">Denda Anggota</h3>
+    @include('component.messages')
     <form action="/issue/showmember" method="get">
         @csrf
     <div class="form-group row col-md-12">
