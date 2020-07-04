@@ -3,14 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use \LaravelTreats\Model\Traits\HasCompositePrimaryKey;
-class reservation extends Model
+use Illuminate\Database\Eloquent\Relations\Pivot;
+class reservation extends Pivot
 {
-    protected $primaryKey = ['id anggota','kode buku'];
     public $incrementing = false;
+    protected $table = 'reservations';
 
     public function user()
     {
         return $this->belongsTo('App\User', 'id anggota');
+    }
+
+    public function book_item()
+    {
+        return $this->belongsTo('App\book_item', 'kode buku', 'kode buku');
     }
 }

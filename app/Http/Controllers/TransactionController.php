@@ -28,6 +28,11 @@ class TransactionController extends Controller
         return view('admin.history');
     }
 
+    public function transactionreservation()
+    {
+        return view('admin.reservation');
+    }
+
     public function showmemberissue(Request $request)
     {
         $user = User::where('username',$request->id)->first();
@@ -53,6 +58,15 @@ class TransactionController extends Controller
             return redirect()->back()->with('error','nomor induk tidak ditemukan');
         }
         return view('admin.history')->with('user', $user);
+    }
+    public function showmembereservation(Request $request)
+    {
+        $user = User::where('username',$request->id)->first();
+        
+        if (!isset($user)) {
+            return redirect()->back()->with('error','nomor induk tidak ditemukan');
+        }
+        return view('admin.reservation')->with('user', $user);
     }
 
     public function addfine(Request $request)
@@ -82,6 +96,21 @@ class TransactionController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function addreservation(Request $request)
+    {
+        $book_item = book_item::findOrFail($request->input('kode'));
+        // if ($book_item->borrow == 0) {
+            // $user = User::findOrFail($request->input('id'));
+        //     $today = Carbon::now()->format('Y-m-d');
+        //     $user->save();
+        //     $book_item->save();
+        //     $user->reservations()->attach($book_item,['tanggal reservasi' => $today, 'judul buku' => $book_item->{'judul buku'},'kode buku' => $book_item->{'kode buku'}]);
+        // } else {
+        //     return redirect()->back()->with('success','buku dapat dipinjam');
+        // }
+        return $book_item->reservation->name;
     }
 
     public function deletefine($id)
