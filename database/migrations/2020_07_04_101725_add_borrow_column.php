@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DeleteColumStatus extends Migration
+class AddBorrowColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class DeleteColumStatus extends Migration
      */
     public function up()
     {
-        if (Schema::hasColumn('fines', 'status denda')) {
-            Schema::table('fines', function (Blueprint $table) {
-                $table->dropColumn('status denda');
-            });
-        }
+        Schema::table('book_items', function (Blueprint $table) {
+            $table->tinyInteger('borrow')->default('1');
+        });
     }
 
     /**
@@ -27,8 +25,8 @@ class DeleteColumStatus extends Migration
      */
     public function down()
     {
-        Schema::table('fines', function (Blueprint $table) {
-            //
+        Schema::table('book_items', function (Blueprint $table) {
+            $table->dropColumn('borrow');
         });
     }
 }

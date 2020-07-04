@@ -69,11 +69,17 @@ class TransactionController extends Controller
 
     public function addloan(Request $request)
     {
-        $user = User::findOrFail($request->input('id'));
         $book_item = book_item::findOrFail($request->input('kode'));
-        $today = Carbon::now()->format('Y-m-d');
-        $returnday = Carbon::now()->addDays(3)->format('Y-m-d');
-        $user->book_item()->attach($book_item, ['nama peminjam' => $user->name,'kode buku' => $book_item->{'kode buku'},'judul buku' => $book_item->{'judul buku'},'tanggal pinjam' => $today, 'batas kembali' => $returnday, 'perpanjang' => 0]);
+        if ($book_item->borrow == 1) {
+            $user = User::findOrFail($request->input('id'));
+            $today = Carbon::now()->format('Y-m-d');
+            $returnday = Carbon::now()->addDays(3)->format('Y-m-d');
+            $book_item->borrow = 0;
+            $book_item->save();
+            $user->book_item()->attach($book_item, ['nama peminjam' => $user->name,'kode buku' => $book_item->{'kode buku'},'judul buku' => $book_item->{'judul buku'},'tanggal pinjam' => $today, 'batas kembali' => $returnday, 'perpanjang' => 0]);
+        } else {
+            return redirect()->back()->with('error','buku sedang dipinjam');
+        }
 
         return redirect()->back();
     }
@@ -104,6 +110,8 @@ class TransactionController extends Controller
         $loan = loan::findOrFail($request->input('id'));
         $date = Carbon::now()->format('Y-m-d');
         $loan->{'tanggal kembali'} = $date;
+        $loan->book_item->borrow = 1;
+        $loan->book_item->save();
         $loan->save();
         return redirect()->back();
     }

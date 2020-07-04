@@ -24,7 +24,7 @@ class CreateBookItemsTable extends Migration
         });
         Schema::table('book_items', function (Blueprint $table) {
             $table->foreign('ISBN')->references('ISBN')->on('books');
-            $table->foreign('ID pemasukan')->references('id')->on('book_entries');
+            $table->foreign('ID pemasukan')->references('id')->on('book_entries')->onDelete('cascade');
         });
     }
 

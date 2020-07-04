@@ -16,7 +16,7 @@
                         <th>Judul Buku</th>
                         <th>Kondisi</th>
                         <th>Tanggal Masuk</th>
-                        <th>Sumber</th>
+                        <th>Status</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -28,7 +28,11 @@
                         <td>{{$book->Book['Judul Buku']}}</td>
                         <td>{{$book->kondisi}}</td>
                         <td>{{date('d-M-Y', strtotime($book->book_entry['tanggal masuk']))}}</td>
-                        <td>{{$book->book_entry->Sumber}}</td>
+                        <td>@if ($book->borrow == 1)
+                            tersedia
+                        @else
+                            dipinjam
+                        @endif</td>
                         <td>
                             {!! Form::open(['action' => ['AdminbookController@deletecopy', $book->book_entry->id], 'method' => 'POST']) !!}
                             {!! Form::hidden('_method', 'DELETE') !!}
