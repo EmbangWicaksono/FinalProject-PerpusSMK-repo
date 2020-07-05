@@ -85,7 +85,11 @@ class AdminController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
-
+    public function searchuser($id)
+    {
+        $list = User::where('username','like','%'.$id.'%')->orderBy('status','asc')->paginate(10);
+        return view('admin.userlist')->with('list', $list);
+    }
     public function insertuser(Request $request)
     {
         $this->validator($request->all())->validate();

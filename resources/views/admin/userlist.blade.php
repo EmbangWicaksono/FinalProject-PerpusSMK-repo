@@ -4,7 +4,12 @@
     @include('component.messages')
 <div class="card mb-4">
     <div class="card-header">
-        <a href="/users/add" class="btn btn-success"><i class="fas fa-user ml-1 mr-1"></i>Tambah Anggota</a>
+        <div class="d-flex">
+        <a href="{{route('user.index')}}" class="btn btn-light"><i class="fas fa-redo-alt"></i></a>
+            <input type="text" name="kode" id="kode" placeholder="No.Induk" class="col-4 form-control">
+            <a href="" class="btn btn-info ml-1" onclick="this.href='member/'+document.getElementById('kode').value"><i class="fas fa-search ml-1 mr-1"></i></a>
+            <a href="/users/add" class="btn btn-success ml-auto"><i class="fas fa-user ml-1 mr-1"></i>Tambah Anggota</a>
+        </div>
     </div>
     <div class="card-body">    
         <div class="table-responsive">
@@ -20,6 +25,7 @@
                         <th colspan="2"></th>
                     </tr>
                 </thead>
+                @if (count($list) > 0)
                 <tbody>
                     @foreach ($list as $item)
                     <tr>
@@ -46,6 +52,9 @@
                     </tr>
                     @endforeach
                 </tbody>
+                @else
+                    <td colspan="8" class="table-warning">data tidak ditemukan</td>
+                @endif
             </table>
             {{$list->links()}}
         </div>

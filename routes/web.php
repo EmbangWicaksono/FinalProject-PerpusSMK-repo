@@ -48,6 +48,7 @@ Route::get('/book/pinjam/{id}', 'UserbookController@showloan');
 Route::get('/book/history/{id}', 'UserbookController@historyloan');
 
 Route::get('/dashboard', 'AdminController@index');
+Route::get('/member/{id}', 'AdminController@searchuser');
 Route::put('users/{user}', 'AdminController@update')->name('update.user');
 Route::get('users/add', 'AdminController@adduser');
 Route::post('users/add', 'AdminController@insertuser')->name('insert.user');
@@ -84,6 +85,7 @@ Route::get('/history/showmember', 'TransactionController@showmemberhistory');
 Route::post('/insertfine', 'TransactionController@addfine');
 Route::post('/insertreservation', 'TransactionController@addreservation');
 Route::post('/insertloan', 'TransactionController@addloan');
+Route::post('/deletereserve', 'TransactionController@deletereservation');
 Route::delete('/deletefine/{id}', 'TransactionController@deletefine');
 Route::get('/perpanjang', 'TransactionController@perpanjang');
 Route::get('/return_book', 'TransactionController@returnbook');

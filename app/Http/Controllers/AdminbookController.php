@@ -37,7 +37,7 @@ class AdminbookController extends Controller
 
     public function itemlist()
     {
-        $books = book_item::orderBy('kode buku', 'asc')->paginate(10);
+        $books = book_item::orderBy('judul buku', 'asc')->paginate(10);
 
         return view('admin.copylist')->with('books', $books);
     }

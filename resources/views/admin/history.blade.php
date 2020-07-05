@@ -59,7 +59,7 @@
                         </tr>
                         <tbody>
                             @if (count($user->book_item) > 0)
-                                @foreach ($user->book_item as $loan)
+                                @foreach ($user->book_item->sortByDesc('updated_at') as $loan)
                                 <tr>
                                 <td>{{$loan['kode buku']}}</td>
                                 <td>{{$loan['judul buku']}}</td>

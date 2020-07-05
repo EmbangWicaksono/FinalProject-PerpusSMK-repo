@@ -25,6 +25,13 @@ class book_item extends Model
                                     ->withPivot('nama peminjam','judul buku','tanggal pinjam','batas kembali','tanggal kembali','perpanjang','id')
                                     ->withTimestamps();
     }
+    public function reserve()
+    {
+        return $this->belongsToMany('App\User', 'reservations', 'kode buku', 'id anggota')
+                                    ->using('App\reservation')
+                                    ->withPivot('tanggal reservasi','judul buku')
+                                    ->withTimestamps();
+    }
 
 
 }

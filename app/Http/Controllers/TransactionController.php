@@ -8,6 +8,7 @@ use App\User;
 use App\fine;
 use App\book_item;
 use App\loan;
+use App\reservation;
 use Carbon\Carbon;
 class TransactionController extends Controller
 {
@@ -101,16 +102,38 @@ class TransactionController extends Controller
     public function addreservation(Request $request)
     {
         $book_item = book_item::findOrFail($request->input('kode'));
-        // if ($book_item->borrow == 0) {
-            // $user = User::findOrFail($request->input('id'));
-        //     $today = Carbon::now()->format('Y-m-d');
-        //     $user->save();
-        //     $book_item->save();
-        //     $user->reservations()->attach($book_item,['tanggal reservasi' => $today, 'judul buku' => $book_item->{'judul buku'},'kode buku' => $book_item->{'kode buku'}]);
-        // } else {
-        //     return redirect()->back()->with('success','buku dapat dipinjam');
-        // }
-        return $book_item->reservation->name;
+        if (count($book_item->reserve) > 0) {
+            return redirect()->back()->with('error','buku telah dipesan!');
+        }
+        if ($book_item->borrow == 0) {
+            $user = User::findOrFail($request->input('id'));
+            $today = Carbon::now()->format('Y-m-d');
+            $user->save();
+            $book_item->save();
+            $user->reservation()->attach($book_item,['tanggal reservasi' => $today, 'judul buku' => $book_item->{'judul buku'},'kode buku' => $book_item->{'kode buku'}]);
+        } else {
+            return redirect()->back()->with('success','buku dapat dipinjam');
+        }
+        return redirect()->back();
+    }
+
+    public function deletereservation(Request $request)
+    {
+        $reserve = reservation::find($request->input('res'));
+        $book_item = book_item::findOrFail($request->input('kode'));
+        if ($book_item->borrow == 1) {
+            $user = User::findOrFail($request->input('id'));
+            $today = Carbon::now()->format('Y-m-d');
+            $returnday = Carbon::now()->addDays(3)->format('Y-m-d');
+            $book_item->borrow = 0;
+            $book_item->save();
+            $user->book_item()->attach($book_item, ['nama peminjam' => $user->name,'kode buku' => $book_item->{'kode buku'},'judul buku' => $book_item->{'judul buku'},'tanggal pinjam' => $today, 'batas kembali' => $returnday, 'perpanjang' => 0]);
+            $reserve->delete();
+        } else {
+            return redirect()->back()->with('error','buku sedang dipinjam');
+        }
+
+        return redirect()->back();
     }
 
     public function deletefine($id)

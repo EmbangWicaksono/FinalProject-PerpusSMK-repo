@@ -20,6 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (count($books)>0)
                         @foreach ($books as $book)
                             <tr>
                             <td>{{$book->nama}}</td>
@@ -31,6 +32,9 @@
                             <td>{{'Rp.'.number_format($book->jumlah*$book['perkiraan harga'],0,'','.')}}</td>
                             </tr>
                         @endforeach
+                        @else
+                            <td colspan="7" class="table-warning">Tidak ada data usulan</td>
+                        @endif
                     </tbody>
                 </table>
             </div>

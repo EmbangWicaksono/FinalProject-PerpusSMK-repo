@@ -63,8 +63,12 @@ class User extends Authenticatable
                                     ->withPivot('nama peminjam','judul buku','tanggal pinjam','batas kembali','tanggal kembali','perpanjang','id')
                                     ->withTimestamps();
     }
+
     public function reservation()
     {
-        return $this->hasMany('App\reservation','id anggota');
+        return $this->belongsToMany('App\book_item', 'reservations', 'id anggota', 'kode buku')
+                                    ->using('App\reservation')
+                                    ->withPivot('tanggal reservasi','judul buku')
+                                    ->withTimestamps();
     }
 }

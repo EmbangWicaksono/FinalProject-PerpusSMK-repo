@@ -65,8 +65,7 @@
                             <th>status</th>
                         </tr>
                         <tbody>
-                            <td>{{$user->reservation}}</td>
-                            {{-- @if (count($user->reservation) > 0)
+                            @if (count($user->reservation) > 0)
                                 @foreach ($user->reservation as $book)
                                 <tr>
                                 <td>{{$book['kode buku']}}</td>
@@ -74,7 +73,15 @@
                                 <td>{{$book->pivot['tanggal reservasi']}}</td>
                                 
                                     @if ($book->borrow == 1)
-                                        <td class="text-success">buku dapat dipinjam</td>
+                                    <td>
+                                    <form action="/deletereserve" method="post">
+                                    @csrf
+                                    <input type="hidden" name="kode" id="kode" value="{{$book['kode buku']}}">
+                                    <input type="hidden" name="res" id="res" value="{{$book->pivot->id}}">
+                                    <input type="hidden" name="id" id="id" value="{{$user->id}}">
+                                    <button type="submit" class="btn btn-secondary">pinjam buku</button>
+                                    </form>
+                                    </td>
                                     @else
                                         <td class="text-danger">buku masih dipinjam</td>
                                     @endif
@@ -83,7 +90,7 @@
                                 @endforeach
                             @else
                                 <td colspan="4" class="table-danger" style="text-align: center">tidak ada buku yang dipesan!</td>
-                            @endif --}}
+                            @endif
                         </tbody>
                     </thead>
                 </table>
