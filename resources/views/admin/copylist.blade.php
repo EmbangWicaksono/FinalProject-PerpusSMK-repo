@@ -4,7 +4,12 @@
     @include('component.messages')
 <div class="card">
     <div class="card-header">
-        <a href="/addcopy" class="btn btn-success float-right">Tambah Salinan</a>
+        <div class="d-flex">
+            <a href="/listitem" class="btn btn-light"><i class="fas fa-redo-alt"></i></a>
+            <input type="text" name="kode" id="kode" placeholder="Judul Buku" class="col-4 form-control">
+            <a href="" class="btn btn-info ml-1" onclick="this.href='Copy/'+document.getElementById('kode').value"><i class="fas fa-search ml-1 mr-1"></i></a>
+            <a href="/addcopy" class="btn btn-success ml-auto">Tambah Salinan</a>
+        </div>
     </div>
     <div class="card-body">
         <div class="table-responsive">

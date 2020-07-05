@@ -180,4 +180,11 @@ class AdminbookController extends Controller
 
         return view('admin.bibliolist')->with('books', $books);
     }
+
+    public function searchitem($id)
+    {
+        $books = book_item::where('judul buku','like','%'.$id.'%')->orderBy('judul buku', 'asc')->paginate(10);
+        
+        return view('admin.copylist')->with('books', $books);
+    }
 }
