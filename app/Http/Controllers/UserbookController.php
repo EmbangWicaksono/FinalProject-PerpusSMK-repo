@@ -5,12 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\book_suggestion;
+use App\Book;
 
 class UserbookController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('searchbook','searchpage','detailbuku');
+    }
+
+    public function searchpage()
+    {
+        return view('pages.search_book');
     }
     public function showloan($id)
     {
@@ -53,5 +59,18 @@ class UserbookController extends Controller
         $store->save();
 
         return redirect('/')->with('success', 'Data Berhasil Dimasukkan');
+    }
+
+    public function searchbook(Request $request)
+    {
+        $books = Book::where('Judul Buku','like','%'.$request->input('search').'%')->get();
+        // $books = Book::all();
+        return view('pages.search_book')->with('books', $books);
+    }
+
+    public function detailbuku($id)
+    {
+        $book = Book::where('ISBN',$id)->first();
+        return view('pages.detailbuku')->with('book',$book);
     }
 }

@@ -3,25 +3,36 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                {!! Form::open() !!}
+                <form action="/searchbook" method="get">
                 <div class="input-group">
-                    <div class="input-group-prepend search-panel">
-                        {{-- <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All</button>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                        </div> --}}
-                        {{Form::select('category', ['ISBN' => 'ISBN', 'judul' => 'Judul'],null, ['class' => 'btn'])}}
-                      </div>
-                        <input type="text" class="form-control" name="x" id="search" placeholder="Search">
+                        <input type="text" class="form-control" name="search" id="search" placeholder="Judul Buku">
                         <span class="input-group-btn">
-                            <button class="btn btn-secondary" type="button">
+                            <button class="btn btn-secondary" type="submit">
                             <span class="fas fa-search"></span>
                             </button>
                         </span>
                 </div>
-                {!! Form::close() !!}
+                </form>
+            </div>
+            <div class="col-md-12 mt-5">
+                @isset($books)
+                    @foreach ($books as $item)
+                        <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">{{$item['Judul Buku']}}</h4>
+                            <p class="card-text">
+                                Tahun {{$item['Tahun Terbit']}} <br>
+                                Author : {{$item->author[0]->nama}} <br>
+                                Kategori : {{$item['Jenis Buku']}}
+                                {{-- @foreach ($item->author as $author)
+                            <span class="text-secondary">{{$author->nama}}</span>
+                                @endforeach   --}}
+                            </p>
+                        <a href="/detail/{{$item->ISBN}}" class="btn btn-info">Detail Buku</a>
+                        </div>
+                        </div>
+                    @endforeach
+                @endisset
             </div>
         </div>
     </div>

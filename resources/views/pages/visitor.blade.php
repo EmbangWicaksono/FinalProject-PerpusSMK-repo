@@ -32,7 +32,7 @@
               <tbody>
                   @foreach ($today as $visitor)
                   <tr>
-                  <td>{{$visitor["nama pengunjung"]}}</td>
+                  <td>{{$visitor->user->name}}</td>
                     <td>{{$visitor->status}}</td>
                     <td>{{$visitor->added_on}}</td>
                   </tr>

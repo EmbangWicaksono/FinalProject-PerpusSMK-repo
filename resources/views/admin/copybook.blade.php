@@ -47,7 +47,7 @@
                         <label for="kondisi" class="col-4 col-form-label">Kondisi</label>
                         <div class="col-8">
                             <select name="kondisi" id="kondisi" class="form-control">
-                                <option value="tersedia" {{old('kondisi') == 'tersedia' ? 'selected' : ''}}>Tersedia</option>
+                                <option value="baru" {{old('kondisi') == 'baru' ? 'selected' : ''}}>baru</option>
                                 <option value="bekas" {{old('kondisi') == 'bekas' ? 'selected' : ''}}>Bekas</option>
                             </select>
                         </div>

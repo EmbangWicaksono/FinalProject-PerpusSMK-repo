@@ -146,7 +146,7 @@ class AdminController extends Controller
         if (Gate::denies('isAdmin')) {
             return redirect('/');
         }
-        $penulis = author::orderBy('created_at','desc')->paginate(5);
+        $penulis = author::orderBy('nama','asc')->paginate(5);
         return view('admin.penulis')->with('penulis', $penulis);
     }
 

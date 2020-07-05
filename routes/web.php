@@ -19,9 +19,7 @@
 //     return view('pages.visitor');
 // });
 
-Route::get('/search_book', function () {
-    return view('pages.search_book');
-});
+Route::get('/search_book', 'UserbookController@searchpage');
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
@@ -46,6 +44,8 @@ Route::get('/book/suggest', 'UserbookController@suggest_book');
 Route::put('/booksuggest', 'UserbookController@bookstore')->name('inputsuggestion');
 Route::get('/book/pinjam/{id}', 'UserbookController@showloan');
 Route::get('/book/history/{id}', 'UserbookController@historyloan');
+Route::get('/searchbook', 'UserbookController@searchbook');
+Route::get('/detail/{id}', 'UserbookController@detailbuku');
 
 Route::get('/dashboard', 'AdminController@index');
 Route::get('/member/{id}', 'AdminController@searchuser');

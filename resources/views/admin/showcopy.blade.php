@@ -47,8 +47,8 @@
                         <label for="kondisi" class="col-4 col-form-label">Kondisi</label>
                         <div class="col-8">
                             <select name="kondisi" id="kondisi" class="form-control">
-                                <option value="tersedia" {{$book_item->kondisi == 'tersedia' ? 'selected' : ''}}>Tersedia</option>
-                                <option value="bekas" {{$book_item->kondisi == 'bekas' ? 'selected' : ''}}>Bekas</option>
+                                <option value="baru" {{$book_item->kondisi == 'baru' ? 'selected' : ''}}>baru</option>
+                                <option value="bekas" {{$book_item->kondisi == 'bekas' ? 'selected' : ''}}>bekas</option>
                                 <option value="hilang" {{$book_item->kondisi == 'hilang' ? 'selected' : ''}}>hilang</option>
                                 <option value="rusak" {{$book_item->kondisi == 'rusak' ? 'selected' : ''}}>rusak</option>
                             </select>

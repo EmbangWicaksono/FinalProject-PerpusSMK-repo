@@ -29,10 +29,10 @@
                     @foreach ($books as $book)
                     <tr>
                     <td><a href="/showbiblio/{{$book->ISBN}}" class="btn btn-info"><i class="fas fa-edit"></i></a></td>
-                        <td>{{$book['Judul Buku']}}
-                            <small>Oleh @foreach ($book->author as $author)
+                        <td>{{$book['Judul Buku']}} <br>
+                            @foreach ($book->author as $author)
                                 <span class="badge badge-secondary">{{$author->nama}}</span>
-                            @endforeach</small>
+                            @endforeach
                         </td>
                         <td>{{$book->ISBN}}</td>
                         <td>{{$book['Jenis Buku']}}</td>
