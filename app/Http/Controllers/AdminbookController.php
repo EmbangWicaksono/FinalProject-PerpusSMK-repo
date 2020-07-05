@@ -173,4 +173,11 @@ class AdminbookController extends Controller
         $book->delete();
         return redirect('/listbiblio')->with('success', 'data berhasil dihapus!');
     }
+
+    public function searchbiblio($id)
+    {
+        $books = Book::where('Judul Buku','like','%'.$id.'%')->orderBy('Judul Buku', 'asc')->paginate(10);
+
+        return view('admin.bibliolist')->with('books', $books);
+    }
 }

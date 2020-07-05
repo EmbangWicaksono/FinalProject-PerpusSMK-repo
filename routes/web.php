@@ -73,6 +73,7 @@ Route::get('/listitem', 'AdminbookController@itemlist');
 Route::put('/editcopy/{book}', 'AdminbookController@editcopy')->name('update.copy');
 Route::delete('/deletecopy/{id}', 'AdminbookController@deletecopy');
 Route::delete('/deletebiblio/{id}', 'AdminbookController@deletebiblio');
+Route::get('/Book/{id}', 'AdminbookController@searchbiblio');
 
 Route::get('/transaction/denda', 'TransactionController@transactionissue');
 Route::get('/transaction/pinjam', 'TransactionController@transactionloan');

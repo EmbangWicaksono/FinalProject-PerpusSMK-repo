@@ -3,7 +3,12 @@
     <h2 class="mt-4">Data Buku</h2>
 <div class="card">
     <div class="card-header">
-        <a href="/addbiblio" class="btn btn-success">Tambah Buku</a>
+        <div class="d-flex">
+            <a href="/listbiblio" class="btn btn-light"><i class="fas fa-redo-alt"></i></a>
+            <input type="text" name="kode" id="kode" placeholder="Judul Buku" class="col-4 form-control">
+            <a href="" class="btn btn-info ml-1" onclick="this.href='Book/'+document.getElementById('kode').value"><i class="fas fa-search ml-1 mr-1"></i></a>
+            <a href="/addbiblio" class="btn btn-success ml-auto">Tambah Buku</a>
+        </div>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -19,6 +24,7 @@
                         <th></th>
                     </tr>
                 </thead>
+                @if (count($books) > 0)
                 <tbody>
                     @foreach ($books as $book)
                     <tr>
@@ -41,6 +47,9 @@
                     </tr>
                     @endforeach
                 </tbody>
+                @else
+                    <td colspan="7" class="table-warning">Data tidak ditemukan</td>
+                @endif
             </table>
         </div>
         {{$books->links()}}
