@@ -25,7 +25,7 @@ class AdminController extends Controller
         // if (Gate::denies('isAdmin')) {
         //     return redirect('/');
         // }
-        return view('admin.index');
+        return redirect('/');
     }
 
     public function edituser()
