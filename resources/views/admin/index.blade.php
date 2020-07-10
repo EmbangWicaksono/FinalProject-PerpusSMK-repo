@@ -27,4 +27,55 @@
         </div>
     </div>
 </div>
+<div class="card">
+<div class="card-header">
+<div class="card-title"><i class="fas fa-table mr-1"></i>Laporan Buku</div>
+</div>
+<div class="card-body">
+<form action="/export/book" method="post">
+    <div class="form-group row">
+        <label for="datetime" class="col-form-label mr-3 ml-2">Tanggal : </label>
+        <input type="date" name="datetime[]" id="datetime[]" class="mb-2 col-2 form-control"><span class="ml-2 mr-2 col-form-label">-</span><input type="date" name="datetime[]" id="datetime[]" class="mb-2 col-2 form-control">
+    </div>
+    <div class="input-group mt-1">
+        @csrf
+        <button type="submit" class="btn btn-success">Export</button>
+    </div>
+</form>
+</div>
+</div>
+<div class="card">
+<div class="card-header">
+<div class="card-title"><i class="fas fa-table mr-1"></i>Laporan Peminjaman</div>
+</div>
+<div class="card-body">
+<form action="/export/loan" method="post">
+    <div class="form-group row">
+        <label for="datetime" class="col-form-label mr-3 ml-2">Tanggal : </label>
+        <input type="date" name="datetime[]" id="datetime[]" class="mb-2 col-2 form-control"><span class="ml-2 mr-2 col-form-label">-</span><input type="date" name="datetime[]" id="datetime[]" class="mb-2 col-2 form-control">
+    </div>
+    <div class="input-group mt-1">
+        @csrf
+        <button type="submit" class="btn btn-success">Export</button>
+    </div>
+</form>
+</div>
+</div>
+<div class="card">
+<div class="card-header">
+<div class="card-title"><i class="fas fa-table mr-1"></i>Laporan Pengunjung</div>
+</div>
+<div class="card-body">
+<form action="/export/visitor" method="post">
+    <div class="form-group row">
+        <label for="datetime" class="col-form-label mr-3 ml-2">Tanggal : </label>
+        <input type="date" name="datetime[]" id="datetime[]" class="mb-2 col-2 form-control"><span class="ml-2 mr-2 col-form-label">-</span><input type="date" name="datetime[]" id="datetime[]" class="mb-2 col-2 form-control">
+    </div>
+    <div class="input-group mt-1">
+        @csrf
+        <button type="submit" class="btn btn-success">Export</button>
+    </div>
+</form>
+</div>
+</div>
 @endsection

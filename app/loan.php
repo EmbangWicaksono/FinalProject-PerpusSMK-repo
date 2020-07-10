@@ -14,4 +14,9 @@ class loan extends Pivot
     {
         return $this->belongsTo('App\book_item', 'kode buku', 'kode buku');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'ID anggota');
+    }
 }

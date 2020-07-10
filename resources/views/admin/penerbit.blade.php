@@ -21,7 +21,7 @@
                     <tbody>
                         @foreach ($penerbit as $item)
                             <tr>
-                                <td>{{$item->Nama}}</td>
+                            <td><a href="/publisher/{{$item->id}}">{{$item->Nama}}</a></td>
                                 <td style="text-align: right">
                                     {!! Form::open(['action' => ['AdminController@penerbitdelete', $item->id], 'method' => 'POST']) !!}
                                     {!! Form::hidden('_method', 'DELETE') !!}

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Input;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BookEntry;
+use App\Exports\Visitorlist;
+use App\Exports\LoanReport;
 use App\publisher;
 use App\author;
 use App\Book;
@@ -44,6 +48,13 @@ class AdminbookController extends Controller
 
     public function insertbiblio(Request $request)
     {
+        $this->validate($request,[
+            'ISBN' => 'required|numeric',
+            'Judul' => 'required',
+            'Tahun_Terbit' => 'required|numeric|digits:4',
+            'Klasifikasi' => 'required',
+            'Bahasa' => 'required'
+        ]);
         $Book = new Book;
         $Book->ISBN = $request->input('ISBN');
         $Book->{'Judul Buku'} = $request->input('Judul');
@@ -119,9 +130,8 @@ class AdminbookController extends Controller
     public function showbiblio($id)
     {
         $book = Book::where('ISBN',$id)->firstOrFail();
-        echo $book;
-        echo $book->author;
-        // return view('admin.showbiblio')->with('book', $book);
+        $publishers = publisher::all();
+        return view('admin.showbiblio')->with('book', $book)->with('publishers',$publishers);
     }
 
     public function editcopy(Request $request, $id)
@@ -150,11 +160,20 @@ class AdminbookController extends Controller
         return redirect('/listitem')->with('success', 'data berhasil data berhasil diperbaharui!');
 
     }
-    public function editbiblio(Request $request, $id)
+    public function authorplus($ISBN,$nama,$role)
     {
-        # code...
+        $book = Book::where('ISBN',$ISBN)->firstOrFail();
+        $author_id = author::firstOrCreate(['nama' => $nama],['type' => 'Nama Pribadi']);
+        $book->author()->attach($author_id,['role' => $role]);
+        return redirect()->back();
     }
-
+    public function deleteauthorlist($ISBN,$id)
+    {
+        $book = Book::where('ISBN',$ISBN)->firstOrFail();
+        $author_id = author::find($id);
+        $book->author()->detach($author_id);
+        return redirect()->back();
+    }
     public function deletecopy($id)
     {
         $book_entry = book_entry::findOrFail($id);
@@ -187,4 +206,45 @@ class AdminbookController extends Controller
         
         return view('admin.copylist')->with('books', $books);
     }
+
+    public function biblioupdate(Request $request)
+    {
+        $this->validate($request,[
+            'Judul' => 'required',
+            'Tahun_Terbit' => 'required|numeric|digits:4',
+            'Jenis_Buku' => 'required',
+            'Klasifikasi' => 'required',
+            'Bahasa' => 'required',
+            'Penerbit' => 'required'
+        ]);
+        $book = Book::where('ISBN', $request->input('ISBN'))->first();
+        $book->{'Judul Buku'} = $request->input('Judul');
+        $book->{'Tahun Terbit'} = $request->input('Tahun_Terbit');
+        $book->{'Jenis Buku'} = $request->input('Jenis_Buku');
+        $book->Klasifikasi = $request->input('Klasifikasi');
+        $book->Bahasa = $request->input('Bahasa');
+        $book->{'ID Penerbit'} = $request->input('Penerbit');
+        $book->save();
+        return redirect('/listbiblio');
+    }
+    public function exportbook(Request $request)
+    {
+        $from = $request->input('datetime.0');
+        $to = $request->input('datetime.1');
+        return Excel::download(new BookEntry($from,$to),'Laporan Pemasukan Buku.xlsx');
+    }
+    public function exportvisitor(Request $request)
+    {
+        $from = $request->input('datetime.0');
+        $to = $request->input('datetime.1');
+        return Excel::download(new Visitorlist($from,$to),'Laporan Pengunjung Perpustakaan.xlsx');
+    }
+    public function exportloan(Request $request)
+    {
+        $from = $request->input('datetime.0');
+        $to = $request->input('datetime.1');
+        return Excel::download(new LoanReport($from,$to),'Laporan Peminjaman Perpustakaan.xlsx');
+    }
+
+
 }

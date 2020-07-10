@@ -40,6 +40,12 @@ Route::get('/profile/{username}', function ($username) {
 
     return view('pages.profile')->with('profile', $user);
 })->middleware('auth');
+
+Route::get('admin/{id}', function ($id) {
+    $user = App\User::find($id);
+    return view('admin.editadmin')->with('profile', $user);
+})->middleware('auth.admin');
+
 Route::get('/book/suggest', 'UserbookController@suggest_book');
 Route::put('/booksuggest', 'UserbookController@bookstore')->name('inputsuggestion');
 Route::get('/book/pinjam/{id}', 'UserbookController@showloan');
@@ -56,6 +62,10 @@ Route::get('/usulanbuku', 'AdminController@usulanbooks');
 Route::get('/export/usulanbuku', 'AdminController@exportsuggest');
 Route::get('/penerbit', 'AdminController@penerbitget');
 Route::get('/penulis', 'AdminController@penulisget');
+Route::get('/author/{id}', 'AdminController@penulisedit');
+Route::get('/publisher/{id}', 'AdminController@penerbitedit');
+Route::post('/publisher/edit','AdminController@penerbitupdate');
+Route::post('/penulis/edit','AdminController@penulisupdate');
 Route::post('/penulis/add','AdminController@penulisinput');
 Route::delete('/penulis/{id}','AdminController@penulisdelete');
 Route::post('/penerbit/add','AdminController@penerbitinput');
@@ -64,6 +74,7 @@ Route::delete('/penerbit/{id}','AdminController@penerbitdelete');
 Route::get('/addbiblio','AdminbookController@addbiblio');
 Route::get('/listbiblio','AdminbookController@bibliolist');
 Route::post('/biblioadd','AdminbookController@insertbiblio');
+Route::post('/biblioupdate','AdminbookController@biblioupdate');
 Route::get('/addcopy', 'AdminbookController@additem');
 Route::post('/bookitem','AdminbookController@insertcopy');
 Route::post('autocomplete', 'AdminbookController@search')->name('autocomplete');
@@ -75,6 +86,11 @@ Route::delete('/deletecopy/{id}', 'AdminbookController@deletecopy');
 Route::delete('/deletebiblio/{id}', 'AdminbookController@deletebiblio');
 Route::get('/Book/{id}', 'AdminbookController@searchbiblio');
 Route::get('/Copy/{id}', 'AdminbookController@searchitem');
+Route::get('/authorplus/{ISBN}/{nama}/{role}', 'AdminbookController@authorplus');
+Route::get('/authormin/{ISBN}/{id}', 'AdminbookController@deleteauthorlist');
+Route::post('/export/book', 'AdminbookController@exportbook');
+Route::post('/export/visitor', 'AdminbookController@exportvisitor');
+Route::post('/export/loan', 'AdminbookController@exportloan');
 
 Route::get('/transaction/denda', 'TransactionController@transactionissue');
 Route::get('/transaction/pinjam', 'TransactionController@transactionloan');

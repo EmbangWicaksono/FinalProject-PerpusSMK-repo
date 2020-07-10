@@ -149,7 +149,39 @@ class AdminController extends Controller
         $penulis = author::orderBy('nama','asc')->paginate(5);
         return view('admin.penulis')->with('penulis', $penulis);
     }
+    public function penulisedit($id)
+    {
+        $penulis = author::find($id);
+        return view('admin.editauthor')->with('author',$penulis);
+    }
 
+    public function penulisupdate(Request $request)
+    {
+        $this->validate($request,[
+            'nama' => 'required|string'
+        ]);
+        $penulis = author::find($request->input('id'));
+        $penulis->nama = $request->input('nama');
+        $penulis->type = $request->input('type');
+        $penulis->save();
+        return redirect('/penulis')->with('success','data telah diubah');
+    }
+    public function penerbitedit($id)
+    {
+        $penerbit = publisher::find($id);
+        return view('admin.editpublisher')->with('publisher',$penerbit);
+    }
+
+    public function penerbitupdate(Request $request)
+    {
+        $this->validate($request,[
+            'penerbit_name' => 'required'
+        ]);
+        $penerbit = publisher::findOrFail($request->input('id'));
+        $penerbit->Nama = $request->input('penerbit_name');
+        $penerbit->save();
+        return redirect('/penerbit')->with('success','data telah diubah');
+    }
     public function penulisinput(Request $request)
     {
         $this->validate($request,[

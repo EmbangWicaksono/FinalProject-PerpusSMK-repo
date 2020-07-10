@@ -21,7 +21,7 @@ class userController extends Controller
     public function index()
     {
         $list = User::where('username','!=','adminperpus')
-                        ->orderBy('status','asc')->paginate(10);
+                        ->orderBy('username','asc')->paginate(10);
 
         return view('admin.userlist')->with('list', $list);
     }

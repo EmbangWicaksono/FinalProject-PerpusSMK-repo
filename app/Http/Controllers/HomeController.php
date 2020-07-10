@@ -37,7 +37,7 @@ class HomeController extends Controller
             $status = Auth::user()->status;
             if ($status == 'admin') {
                 $visitor = visitor::whereDate('added_on', Carbon::today())->count(); 
-                $loan = loan::whereDate('tanggal pinjam', Carbon::today())->count();
+                $loan = loan::whereDate('updated_at', Carbon::today())->count();
                 $reservation = reservation::all()->count();
                 $today = collect([
                     'visitor' => $visitor,

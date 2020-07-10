@@ -24,6 +24,9 @@
                     <tbody>
                         @foreach ($penulis as $item)
                             <tr>
+                                <td>
+                                <a href="/author/{{$item->id}}" class="btn btn-info"><i class="fas fa-edit"></i></a>
+                                </td>
                                 <td>{{$item->nama}}</td>
                                 <td>{{$item->type}}</td>
                                 <td style="text-align: right">
