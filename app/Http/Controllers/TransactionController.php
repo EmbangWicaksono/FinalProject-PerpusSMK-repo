@@ -119,7 +119,7 @@ class TransactionController extends Controller
 
     public function deletereservation(Request $request)
     {
-        $reserve = reservation::find($request->input('res'));
+        $reserve = reservation::where('kode buku',$request->input('kode'))->where('id anggota',$request->input('id'));
         $book_item = book_item::findOrFail($request->input('kode'));
         if ($book_item->borrow == 1) {
             $user = User::findOrFail($request->input('id'));

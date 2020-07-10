@@ -77,7 +77,6 @@
                                     <form action="/deletereserve" method="post">
                                     @csrf
                                     <input type="hidden" name="kode" id="kode" value="{{$book['kode buku']}}">
-                                    <input type="hidden" name="res" id="res" value="{{$book->pivot->id}}">
                                     <input type="hidden" name="id" id="id" value="{{$user->id}}">
                                     <button type="submit" class="btn btn-secondary">pinjam buku</button>
                                     </form>
