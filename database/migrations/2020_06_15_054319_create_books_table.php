@@ -25,7 +25,6 @@ class CreateBooksTable extends Migration
         Schema::table('books', function (Blueprint $table) {
             $table->BigInteger('ID Penerbit')->unsigned();
             $table->foreign('ID Penerbit')->references('id')->on('publishers');
-            // $table->foreignId('ID_Penerbit')->constrained();
         });
     }
 

@@ -10,13 +10,7 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 class SuggestReport implements FromView, ShouldAutoSize
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    // public function collection()
-    // {
-    //     return book_suggestion::all();
-    // }
+
     public function view(): View
     {
         return view('admin.exports', [
